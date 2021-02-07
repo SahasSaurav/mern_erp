@@ -29128,7 +29128,11 @@ video {
   animation: bounce 1s infinite;
 }
 
-.input{
+*{
+  outline: 2px dashed lightblue
+}
+
+.input {
   --tw-bg-opacity: 1;
   background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
   border-radius: 1.5rem;
@@ -29153,10 +29157,20 @@ video {
   width: 100%;
 }
 
-.label{
+.label {
   font-size: 1.125rem;
   line-height: 1.75rem;
   margin-left: 1rem;
+}
+
+.error {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-top: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(248, 113, 113, var(--tw-text-opacity));
+  letter-spacing: 0.05em;
 }
 
 @media (min-width: 640px) {

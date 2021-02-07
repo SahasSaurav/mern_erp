@@ -1,20 +1,22 @@
-// import {useState } from 'react'
+// import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
+
   return (
-    <header className="flex flex-col px-14  py-4 bg-white h-screen max-w-xs w-full ">
+    <header className="flex  flex-col px-14  py-4 bg-white h-screen max-w-full ">
       {/* photo */}
       <div>
         <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 shadow-xl ">
-          <div className="w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md  "></div>
+          <div
+            className="flex justify-center items-center text-white text-2xl tracking-widest font-medium w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md">EM</div>
         </div>
         <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600">
           Elon Musk
         </p>
       </div>
       <ul className=" flex flex-col  mt-32">
-        <li className="py-2 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
           <NavLink
             to=""
             className="flex flex-row justify-start  items-end text-gray-500"
@@ -31,7 +33,7 @@ const Sidebar = () => {
             <span>Overview</span>
           </NavLink>
         </li>
-        <li className="py-2 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
           <NavLink
             to="/as"
             className="flex flex-row justify-start items-end text-gray-500"
@@ -48,7 +50,7 @@ const Sidebar = () => {
             <span>Profile</span>
           </NavLink>
         </li>
-        <li className="py-2 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
           <NavLink
             to="/as"
             className="flex flex-row justify-start items-end text-gray-500"
@@ -65,7 +67,7 @@ const Sidebar = () => {
             <span>Academics</span>
           </NavLink>
         </li>
-        <li className="py-2 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
           <NavLink
             to="/as"
             className="flex flex-row justify-start items-end text-gray-500"
@@ -82,7 +84,7 @@ const Sidebar = () => {
             <span>Exams</span>
           </NavLink>
         </li>
-        <li className="py-2 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
           <NavLink
             to="/as"
             className="flex flex-row justify-start items-end text-gray-500"
@@ -97,6 +99,23 @@ const Sidebar = () => {
               <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"></path>
             </svg>
             <span>Fees</span>
+          </NavLink>
+        </li>
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+          <NavLink
+            to="/as"
+            className="flex flex-row justify-start items-end text-gray-500"
+            activeClassName="text-blue-500"
+          >
+            <svg
+              className="h-6 w-6 mr-4  fill-current"
+              focusable="false"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M20 2H4.01c-1.1 0-2 .9-2 2v18L6 18h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-5c0 .55-.45 1-1 1s-1-.45-1-1V7c0-.55.45-1 1-1s1 .45 1 1v2z"></path>
+            </svg>
+            <span>Feedback</span>
           </NavLink>
         </li>
       </ul>
