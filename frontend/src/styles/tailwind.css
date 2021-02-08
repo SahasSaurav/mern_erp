@@ -2,9 +2,47 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* @import '../../public/assets/fonts/SF-Pro-Display-Light.otf'; */
 
+
+
+@layer base{
+  @font-face {
+    font-family: "San-Francisco-Pro";
+    font-weight: 300;
+    src: local(assets/fonts/SF-Pro-Display-Light.otf) format("opentype");
+  }
+  @font-face {
+    font-family: "San-Francisco-Pro";
+    font-weight: 400;
+    src: local(/assets/fonts/SF-Pro-Display-Regular.otf) format("otf");
+  }
+  @font-face {
+    font-family: "San-Francisco-Pro";
+    font-weight: 500;
+    src: local(/assets/fonts/SF-Pro-Display-Medium.otf) format("otf");
+  }
+  @font-face {
+    font-family: "San-Francisco-Pro";
+    font-weight: 600;
+    src: local(/assets/fonts/SF-Pro-Display-Semibold.otf) format("otf");
+  }
+  @font-face {
+    font-family: "San-Francisco-Pro";
+    font-weight: 700;
+    src: local(/assets/fonts/SF-Pro-Display-Bold.otf) format("otf");
+  }
+  /* body{
+    @apply font-sf-pro;
+  } */
+}
+/* 
 *{
   outline: 2px dashed lightblue;
+} */
+
+*{
+   @apply transition-colors duration-300;
 }
 
 .input {

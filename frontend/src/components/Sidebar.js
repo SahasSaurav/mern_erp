@@ -4,23 +4,23 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
 
   return (
-    <header className="flex  flex-col px-14  py-4 bg-white h-screen max-w-full ">
+    <header className="flex  flex-col px-14  py-4 bg-white dark:bg-gray-800 dark:text-white h-screen max-w-full ">
       {/* photo */}
       <div>
-        <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 shadow-xl ">
+        <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 dark:bg-gray-600 shadow-xl ">
           <div
             className="flex justify-center items-center text-white text-2xl tracking-widest font-medium w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md">EM</div>
         </div>
-        <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600">
+        <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600 dark:text-white">
           Elon Musk
         </p>
       </div>
       <ul className=" flex flex-col  mt-32">
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to=""
-            className="flex flex-row justify-start  items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/overview"
+            className="flex flex-row justify-start  items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400 "
           >
             <svg
               className="h-6 w-6 mr-4  fill-current "
@@ -33,11 +33,11 @@ const Sidebar = () => {
             <span>Overview</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to="/as"
-            className="flex flex-row justify-start items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/profile"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
               className="h-6 w-6 mr-4  fill-current "
@@ -50,11 +50,11 @@ const Sidebar = () => {
             <span>Profile</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to="/as"
-            className="flex flex-row justify-start items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/academics"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
               className="h-6 w-6 mr-4  fill-current "
@@ -67,11 +67,11 @@ const Sidebar = () => {
             <span>Academics</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to="/as"
-            className="flex flex-row justify-start items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/exams"
+            className="flex flex-row justify-start items-end  text-gray-600 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
               className="h-6 w-6 mr-4  fill-current "
@@ -84,11 +84,11 @@ const Sidebar = () => {
             <span>Exams</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to="/as"
-            className="flex flex-row justify-start items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/fees"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
               className="h-6 w-6 mr-4  fill-current"
@@ -101,11 +101,11 @@ const Sidebar = () => {
             <span>Fees</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600">
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
-            to="/as"
-            className="flex flex-row justify-start items-end text-gray-500"
-            activeClassName="text-blue-500"
+            to="/feedback"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
               className="h-6 w-6 mr-4  fill-current"

@@ -1,6 +1,6 @@
 import {Switch,Route} from 'react-router-dom'
 import Sidebar from "./components/Sidebar";
-import Overview from './pages/Overview';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
       
       <div className="flex">
         <Sidebar />
-        <Overview />
+        <Dashboard />
         {/* <Switch>
           <Route exact to="" component={} />
         </Switch> */}
