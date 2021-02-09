@@ -34,15 +34,19 @@ const ThemeProvider = ({ children }) => {
     themeDispatch({ type: "PERSIST-THEME" });
   };
 
-  const toggleTheme = (darkMode) => {
-    themeDispatch({ type: "TOGGLE-THEME", payload: darkMode });
+  const setDarkmode = () => {
+    themeDispatch({ type: "SET-DARK"});
+  };
+  const setLightmode = () => {
+    themeDispatch({ type: "SET-LIGHT"});
   };
 
   return (
     <ThemeContext.Provider
       value={{
         ...themeState,
-        toggleTheme,
+      setDarkmode,
+      setLightmode
         // persistTheme,
       }}
     >

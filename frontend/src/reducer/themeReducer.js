@@ -1,17 +1,14 @@
 export const themeReducer = (state, action) => {
+  const root = document.documentElement;
   switch (action.type) {
-    case "TOGGLE-THEME":
-      const darkmode = action.payload;
-      const root = document.documentElement;
-      if (darkmode === true) {
-        root.classList.remove("dark");
-      } else {
-        root.classList.add("dark");
-      }
-      return { darkmode: !action.payload };
-
+    case "SET-DARK":
+      root.classList.add("dark");
+      return { darkmode: true };
+    case "SET-LIGHT":
+      root.classList.remove("dark");
+      return { darkmode: false };
     case "PERSIST-THEME":
-      const isDark =state.darkmode
+      const isDark = state.darkmode;
       const html = document.documentElement;
       if (isDark === true) {
         html.classList.add("dark");

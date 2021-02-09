@@ -8,7 +8,7 @@ const Input = () => {
         <label htmlFor="name" className="ml-4  text-lg" >Name</label>
         <input
           type="text"
-          className={`px-5 bg-gray-100 py-2 text-lg max-w-xs w-full focus:outline-none ring-2  rounded-3xl ${error?'ring-red-400 focus-ring-400':'focus:ring-blue-400'}`}
+          className={` ${error?'ring-red-400 focus-ring-400':'focus:ring-blue-400'}`}
           name=""
           id=""
         />
