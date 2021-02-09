@@ -27,12 +27,18 @@ const Login = () => {
               </h3>
               <SignupForm />
             </div>
-            <div className=" max-w-xl w-full bg-red-200 ">
+
+            <div className=" relative  max-w-xl w-full bg-red-200 ">
               <img
                 className="w-full h-full  object-cover "
                 src="/assets/images/BIT.jpeg"
                 alt=""
+                style={{
+                  maxHeight: "552px",
+                  height: "100%",
+                }}
               />
+              <span className="absolute top-0 left-0  w-full h-full  bg-blue-400  opacity-50 z-10"></span>
             </div>
           </div>
         </div>
