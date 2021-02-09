@@ -19,8 +19,8 @@ const SignupForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="w-full"
     >
-      <div>
-        <div className="relative flex w-full flex-wrap items-stretch mb-3 rounded-3xl">
+      <div className=" space-y-6 ">
+        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
               className="w-6 h-6 fill-current text-gray-900 "
@@ -42,13 +42,13 @@ const SignupForm = () => {
                 message: "Enter a valid e-mail address",
               },
             })}
-            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative  bg-white rounded-3xl text-base border border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
+            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white rounded-3xl text-lg font-medium border border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
           />
         </div>
-        {errors.email && <small className="error">{errors.email?.message}</small>}
+        {errors.email && (<small className="error">{errors.email?.message}</small>)}
       </div>
-      <div>
-        <div className="relative flex w-full flex-wrap items-stretch mb-3 rounded-3xl">
+      <div className="my-6">
+        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
               className="w-6 h-6 fill-current text-gray-900 "
@@ -65,8 +65,9 @@ const SignupForm = () => {
             name="password"
             ref={register({
               required: "Please enter your password",
+              minLength:6,
             })}
-            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative  bg-white rounded-3xl text-base border border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
+            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative  bg-white rounded-3xl  border text-lg font-medium border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
           />
           <button
             type="button"
@@ -74,7 +75,7 @@ const SignupForm = () => {
             className="z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 right-0 pr-3 py-4 focus:outline-none"
           >
             <svg
-              className="w-6 h-6 fill-current text-gray-900 "
+              className="w-6 h-6 fill-current text-gray-900 hover:text-blue-600 duration-100 "
               focusable="false"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -94,8 +95,8 @@ const SignupForm = () => {
         {errors.password && (<small className="error" >{errors.password?.message}</small>)}
       </div>
       <button
-        className="w-full  bg-blue-500 text-white hover:bg-blue-600 font-semibold uppercase text-base px-8 py-4 rounded-3xl shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 transition duration-100"
-        type="submit"
+        className="w-full bg-blue-500 text-white hover:bg-blue-600 font-semibold uppercase text-base px-8 py-4 rounded-3xl shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100"
+        type="submit" 
       >
         Sign in
       </button>

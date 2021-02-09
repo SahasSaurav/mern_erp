@@ -12,11 +12,30 @@ const Login = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="conatiner mx-auto  max-w-md bg-red-300 px-6 py-4">
-        <img className="h-24 w-24 mx-auto" src="/assets/images/bitlogo.png" alt="logo"/>
-        <h1>Welcome</h1>
-        <h3>Birla Institute of Technology</h3>
-        <SignupForm />
+      <div className="container mx-auto w-full h-screen">
+        <div className="flex justify-center items-center w-full h-full ">
+          <div className="flex rounded-3xl overflow-hidden shadow-xl">
+            <div className="flex flex-col justify-center items-center  max-w-md  w-full bg-white  px-10 py-4 ">
+              <img
+                className="h-24 w-24 mx-auto object-contain mt-8"
+                src="/assets/images/bitlogo.png"
+                alt="logo"
+              />
+              <h1 className="text-4xl  mx-auto mt-4 mb-2 ">Welcome</h1>
+              <h3 className="text-xl text-center mb-8">
+                Birla Institute of Technology
+              </h3>
+              <SignupForm />
+            </div>
+            <div className=" max-w-xl w-full bg-red-200 ">
+              <img
+                className="w-full h-full  object-cover "
+                src="/assets/images/BIT.jpeg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
