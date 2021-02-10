@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setLightMode } from "../actions/themeAction";
 
@@ -6,7 +6,6 @@ const Toggle = () => {
   const dispatch = useDispatch();
 
   const theme = useSelector((state) => state.theme);
-
   const { darkMode } = theme;
 
   const toggleTheme = (e) => {
@@ -17,15 +16,18 @@ const Toggle = () => {
     }
   };
 
-  const [value, setvalue] = useState();
+  const toggleRef= useRef()
+
 
   useEffect(() => {
-    if (darkMode) {
-      setvalue(true);
-    } else {
-      setvalue(false);
+    const theme=localStorage.getItem('theme')
+    if(theme){
+      const {darkMode:isDark}=JSON.parse(theme);
+      toggleRef.current.checked=isDark;
     }
-  }, [darkMode]);
+  }, []);
+
+
 
   return (
     <div
@@ -36,7 +38,8 @@ const Toggle = () => {
         type="checkbox"
         name="toggle"
         id="toggle"
-        checked={value}
+        value={darkMode}
+        ref={toggleRef}
         onClick={toggleTheme}
         className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-400 appearance-none cursor-pointer focus: outline-none"
       />
