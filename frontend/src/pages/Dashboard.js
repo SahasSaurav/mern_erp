@@ -23,7 +23,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         <div className="grid grid-cols-1 gap-6  bg-gray-200 dark:bg-gray-700 m-4 rounded-3xl p-6  shadow-xl">
           {/* calnedar */}
           <div className="flex flex-col rounded-xl px-4 gap-4">
