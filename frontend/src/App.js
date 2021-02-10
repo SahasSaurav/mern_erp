@@ -9,11 +9,11 @@ const App = () => {
       
       <div className="flex">
         <Login />
-        {/* <Sidebar />
-        <Switch>
-          <Route exact to="/" component={Dashboard} />
-          <Route exact to="/login" component={Login} />
-        </Switch> */}
+        {/* <Sidebar /> */}
+        {/* <Switch> */}
+          {/* <Route exact to="/" component={Dashboard} /> */}
+          {/* <Route exact to="/login" component={Login} /> */}
+        {/* </Switch> */}
       </div>
     </>
   );

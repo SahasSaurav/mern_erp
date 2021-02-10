@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css -w",
     "dev":"concurrently \"npm run start\" \"npm run watch:css\" "
   },
   "eslintConfig": {

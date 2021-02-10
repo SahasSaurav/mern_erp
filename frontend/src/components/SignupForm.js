@@ -21,14 +21,14 @@ const SignupForm = () => {
     >
       <div className=" space-y-6 ">
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
-          <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
+          <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 dark:text- absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
-              className="w-6 h-6 fill-current text-gray-900 "
+              className="w-6 h-6 fill-current text-gray-900 dark:text-white "
               focusable="false"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"></path>
+             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
             </svg>
           </span>
           <input
@@ -42,7 +42,7 @@ const SignupForm = () => {
                 message: "Enter a valid e-mail address",
               },
             })}
-            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white rounded-3xl text-lg font-medium border border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
+            className={`px-3 py-4 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
         </div>
         {errors.email && (<small className="error">{errors.email?.message}</small>)}
@@ -51,7 +51,7 @@ const SignupForm = () => {
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
-              className="w-6 h-6 fill-current text-gray-900 "
+              className="w-6 h-6 fill-current text-gray-900 dark:text-white "
               focusable="false"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -67,7 +67,7 @@ const SignupForm = () => {
               required: "Please enter your password",
               minLength:6,
             })}
-            className="px-3 py-4 placeholder-gray-400 text-gray-700 relative  bg-white rounded-3xl  border text-lg font-medium border-gray-400 outline-none focus:outline-none focus:ring-2 ring-blue-400  w-full pl-10"
+            className={`px-3 py-4 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
           <button
             type="button"
@@ -75,7 +75,7 @@ const SignupForm = () => {
             className="z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 right-0 pr-3 py-4 focus:outline-none"
           >
             <svg
-              className="w-6 h-6 fill-current text-gray-900 hover:text-blue-600 duration-100 "
+              className="w-6 h-6 fill-current text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 duration-100 "
               focusable="false"
               viewBox="0 0 24 24"
               aria-hidden="true"

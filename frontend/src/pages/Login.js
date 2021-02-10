@@ -1,7 +1,9 @@
-import React from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import SignupForm from "../components/SignupForm";
 
 const Login = () => {
+  const {darkmode}=useContext(ThemeContext)
   return (
     <section
       className="w-full h-screen lg:overflow-hidden"
@@ -15,7 +17,7 @@ const Login = () => {
       <div className="container mx-auto w-full h-screen">
         <div className="flex justify-center items-center w-full h-full ">
           <div className="flex rounded-3xl overflow-hidden shadow-xl">
-            <div className="flex flex-col justify-center items-center  max-w-md  w-full bg-white  px-10 py-4 ">
+            <div className="flex flex-col justify-center items-center  max-w-md  w-full bg-white dark:bg-gray-800 dark:text-white px-10 py-4 ">
               <img
                 className="h-24 w-24 mx-auto object-contain mt-8"
                 src="/assets/images/bitlogo.png"
@@ -33,12 +35,9 @@ const Login = () => {
                 className="w-full h-full  object-cover "
                 src="/assets/images/BIT.jpeg"
                 alt=""
-                style={{
-                  maxHeight: "552px",
-                  height: "100%",
-                }}
               />
-              <span className="absolute top-0 left-0  w-full h-full  bg-blue-400  opacity-50 z-10"></span>
+              <span className="absolute top-0 left-0  w-full h-full  bg-indigo-400  opacity-20 z-10"></span>
+             {darkmode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-20 z-10"></span>)}
             </div>
           </div>
         </div>
