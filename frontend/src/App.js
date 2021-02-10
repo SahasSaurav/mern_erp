@@ -8,12 +8,12 @@ const App = () => {
     <>
       
       <div className="flex">
-        <Login />
-        {/* <Sidebar /> */}
-        {/* <Switch> */}
-          {/* <Route exact to="/" component={Dashboard} /> */}
+        {/* <Login /> */}
+        <Sidebar />
+        <Switch>
+          <Route exact to="/" component={Dashboard} />
           {/* <Route exact to="/login" component={Login} /> */}
-        {/* </Switch> */}
+        </Switch>
       </div>
     </>
   );

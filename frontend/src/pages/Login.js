@@ -1,9 +1,10 @@
-import { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+import {useSelector} from 'react-redux'
 import SignupForm from "../components/SignupForm";
 
 const Login = () => {
-  const {darkmode}=useContext(ThemeContext)
+  const theme=useSelector(state=>state.theme);
+  const {darkMode}=theme
+
   return (
     <section
       className="w-full h-screen lg:overflow-hidden"
@@ -37,7 +38,7 @@ const Login = () => {
                 alt=""
               />
               <span className="absolute top-0 left-0  w-full h-full  bg-indigo-400  opacity-20 z-10"></span>
-             {darkmode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-20 z-10"></span>)}
+             {darkMode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-20 z-10"></span>)}
             </div>
           </div>
         </div>

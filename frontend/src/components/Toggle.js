@@ -1,32 +1,37 @@
-import { useContext, useState,useEffect } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkMode, setLightMode } from "../actions/themeAction";
 
 const Toggle = () => {
-  const { darkmode,setDarkmode,setLightmode } = useContext
-  (ThemeContext);
+  const dispatch = useDispatch();
 
-  const toggleTheme=(e)=>{
-    console.log(e.target.checked)
-    if(e.target.checked){
-      setDarkmode()
-    }else{
-      setLightmode()
+  const theme = useSelector((state) => state.theme);
+
+  const { darkMode } = theme;
+
+  const toggleTheme = (e) => {
+    if (e.target.checked) {
+      dispatch(setDarkMode());
+    } else {
+      dispatch(setLightMode());
     }
-  }
+  };
 
-  const [value,setvalue]=useState()
+  const [value, setvalue] = useState();
 
   useEffect(() => {
-   if(darkmode){
-     setvalue(true)
-   }else{
-    setvalue(false)
-   }
-  }, [darkmode])
+    if (darkMode) {
+      setvalue(true);
+    } else {
+      setvalue(false);
+    }
+  }, [darkMode]);
 
   return (
-    <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in" aria-role="switch">
-      <span className="sr-only">Toggle to enable  dark mode</span>
+    <div
+      className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+    >
+      <span className="sr-only">Toggle to enable dark mode</span>
       <input
         type="checkbox"
         name="toggle"
