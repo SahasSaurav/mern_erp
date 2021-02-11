@@ -1,7 +1,10 @@
 import Toggle from "../components/Toggle";
+import Sidebar from "../components/Sidebar";
 
 const Dashboard = () => {
   return (
+    <>
+    <Sidebar />
     <section className="bg-white dark:bg-gray-800 w-full h-screen p-6">
       <div className="grid grid-cols-3  w-full h-full ">
         {/* overview */}
@@ -41,6 +44,7 @@ const Dashboard = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

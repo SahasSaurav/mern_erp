@@ -18,7 +18,7 @@ const Login = () => {
       <div className="container mx-auto w-full h-screen">
         <div className="flex justify-center items-center w-full h-full ">
           <div className="flex rounded-3xl overflow-hidden shadow-xl">
-            <div className="flex flex-col justify-center items-center  max-w-md  w-full bg-white dark:bg-gray-800 dark:text-white px-10 py-4 ">
+            <div className="flex flex-col  justify-center items-center  max-w-sm w-full    bg-white dark:bg-gray-800 dark:text-white px-10 py-4 ">
               <img
                 className="h-24 w-24 mx-auto object-contain mt-8"
                 src="/assets/images/bitlogo.png"
@@ -31,7 +31,7 @@ const Login = () => {
               <SignupForm />
             </div>
 
-            <div className=" relative  max-w-xl w-full bg-red-200 ">
+            <div className=" relative  max-w-lg w-full   bg-red-200 ">
               <img
                 className="w-full h-full  object-cover "
                 src="/assets/images/BIT.jpeg"

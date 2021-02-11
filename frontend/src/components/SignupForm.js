@@ -42,7 +42,7 @@ const SignupForm = () => {
                 message: "Enter a valid e-mail address",
               },
             })}
-            className={`px-3 py-4 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
         </div>
         {errors.email && (<small className="error">{errors.email?.message}</small>)}
@@ -67,7 +67,7 @@ const SignupForm = () => {
               required: "Please enter your password",
               minLength:6,
             })}
-            className={`px-3 py-4 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
           <button
             type="button"

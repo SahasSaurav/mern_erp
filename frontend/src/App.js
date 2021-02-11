@@ -1,29 +1,26 @@
-import {useEffect} from 'react'
-import {Switch,Route} from 'react-router-dom'
-import {useDispatch} from 'react-redux';
-import Sidebar from "./components/Sidebar";
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import {peristTheme} from './actions/themeAction';
+import { useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import { peristTheme } from "./actions/themeAction";
 
 const App = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(peristTheme())
-  }, [])
+    dispatch(peristTheme());
+  }, [dispatch]);
+
   return (
-    <>
-      
-      <div className="flex">
-        {/* <Login /> */}
-        <Sidebar />
-        <Switch>
-          <Route exact to="/" component={Dashboard} />
-          {/* <Route exact to="/login" component={Login} /> */}
-        </Switch>
-      </div>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <div className="flex">
+          <Route path="/login" exact component={Login} />
+          <Route path="/" exact component={Dashboard} />
+        </div>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
