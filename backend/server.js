@@ -16,7 +16,6 @@ const app = express();
 // body parser middleware
 app.use(express.json());
 
-
 app.get("/", (req, res) => {
   res.send("hello");
 });

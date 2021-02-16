@@ -39,7 +39,7 @@
 /* 
 *{
   outline: 2px dashed lightblue;
-} */
+}  */
 
 *{
    @apply transition-colors duration-300 ;

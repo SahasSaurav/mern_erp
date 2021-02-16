@@ -18,7 +18,7 @@ const Login = () => {
       <div className="container mx-auto w-full h-screen">
         <div className="flex justify-center items-center w-full h-full ">
           <div className="flex rounded-3xl overflow-hidden shadow-xl">
-            <div className="flex flex-col  justify-center items-center  max-w-sm w-full    bg-white dark:bg-gray-800 dark:text-white px-10 py-4 ">
+            <div className="flex flex-col justify-center items-center  max-w-sm w-full    bg-white dark:bg-gray-800 dark:text-white px-10 py-4 ">
               <img
                 className="h-24 w-24 mx-auto object-contain mt-8"
                 src="/assets/images/bitlogo.png"
@@ -38,7 +38,7 @@ const Login = () => {
                 alt=""
               />
               <span className="absolute top-0 left-0  w-full h-full  bg-indigo-400  opacity-20 z-10"></span>
-             {darkMode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-20 z-10"></span>)}
+             {darkMode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-10 z-10"></span>)}
             </div>
           </div>
         </div>

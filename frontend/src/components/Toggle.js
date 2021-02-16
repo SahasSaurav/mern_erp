@@ -1,6 +1,6 @@
 import { useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDarkMode, setLightMode } from "../actions/themeAction";
+import { setDarkMode, setLightMode} from "../actions/themeAction";
 
 const Toggle = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const Toggle = () => {
 
   const toggleRef= useRef()
 
+  
 
   useEffect(() => {
     const theme=localStorage.getItem('theme')

@@ -14,17 +14,15 @@ export const themeReducer = (state = { darkMode }, action) => {
       return { darkMode: true };
     case SET_LIGHT_MODE:
       root.classList.remove("dark");
-      localStorage.setItem("theme", JSON.stringify({ darkmode: true }));
       return { darkMode: false };
     case PERSIST_THEME:
       const isDark = action.payload;
-      const html = document.documentElement;
       if (isDark === true) {
-        html.classList.add("dark");
+        root.classList.add("dark");
       } else {
-        html.classList.remove("dark");
+        root.classList.remove("dark");
       }
-      return state;
+      return {darkMode:action.payload};
     default:
       return { state };
   }

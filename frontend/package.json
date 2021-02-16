@@ -7,8 +7,8 @@
     "@nivo/core": "^0.67.0",
     "@nivo/pie": "^0.67.0",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css -w",
-    "dev": "concurrently \"npm run start\" \"npm run watch:css\" "
+    "dev": "concurrently  \"npm run watch:css\" \"npm run start\" "
   },
   "eslintConfig": {
     "extends": [
@@ -49,10 +49,10 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.3",
+    "autoprefixer": "^10.2.4",
     "concurrently": "^5.3.0",
-    "postcss": "^8.2.4",
+    "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.3"
   }
 }
