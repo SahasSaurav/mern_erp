@@ -31,7 +31,7 @@ const Login = () => {
               <SignupForm />
             </div>
 
-            <div className=" relative  max-w-lg w-full   bg-red-200 ">
+            <div className="relative  max-w-lg w-full   bg-red-200 ">
               <img
                 className="w-full h-full  object-cover "
                 src="/assets/images/BIT.jpeg"

@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 
 import { peristTheme } from "./actions/themeAction";
 import Sidebar from "./components/Sidebar";
+import ImageUploader from "./components/ImageUploader";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const App = () => {
 
   return (
     <main className="flex">
+     
      <Sidebar  />
       <Switch>
         <Route exact path="/" component={Dashboard} />

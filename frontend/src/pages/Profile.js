@@ -1,4 +1,4 @@
-import React from "react";
+import ImageUploader from '../components/ImageUploader'
 
 const Profile = () => {
   return (
@@ -7,6 +7,7 @@ const Profile = () => {
         <div className="flex flex-col  px-10 py-8 m-6  bg-gray-300 dark:bg-gray-700 rounded-3xl min-w-max h-full ">
           <div className="h-full w-full rounded-3xl bg-white dark:bg-gray-800">
             {" "}
+            <ImageUploader />
           </div>
         </div>
       </div>
