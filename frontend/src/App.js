@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -8,21 +8,28 @@ import Profile from "./pages/Profile";
 
 import { peristTheme } from "./actions/themeAction";
 import Sidebar from "./components/Sidebar";
-import ImageUploader from "./components/ImageUploader";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  let history = useHistory();
+  const isAuthenticated = true;
 
   useEffect(() => {
     dispatch(peristTheme());
   }, [dispatch]);
 
-  const location = useLocation();
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/");
+    } else {
+      history.push("/login");
+    }
+  }, [isAuthenticated]);
 
   return (
     <main className="flex">
-     
-     <Sidebar  />
+      <Sidebar />
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/login" component={Login} />

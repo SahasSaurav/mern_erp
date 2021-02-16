@@ -35,7 +35,6 @@ const ImageUploader = () => {
   const onChangeHandler = async (e) => {
     let selected = e.target.files[0];
     try {
-      console.log("hello");
       const dataUrl = await reader(selected);
       setFile(dataUrl);
       //fetch post request to server to upload it

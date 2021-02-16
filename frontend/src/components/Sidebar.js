@@ -1,7 +1,10 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useRouteMatch } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const location=useLocation()
+  
+  let match=useRouteMatch('/')
+
 
   return (
     <header className={`${location.pathname==='/login'?'hidden':'flex'}  flex-col px-14  py-4 bg-white dark:bg-gray-800 dark:text-white h-screen max-w-full `}>
@@ -21,6 +24,9 @@ const Sidebar = () => {
             to="/"
             className="flex flex-row justify-start  items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
             activeClassName="text-blue-500 dark:text-blue-400 "
+            isActive={(match)=>{
+              return match.isExact?true:false;
+            }}
           >
             <svg
               className="h-6 w-6 mr-4  fill-current "
