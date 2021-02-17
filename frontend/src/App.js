@@ -20,9 +20,7 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/");
-    } else {
+    if (!isAuthenticated) {
       history.push("/login");
     }
   }, [isAuthenticated]);

@@ -1,13 +1,10 @@
-import { NavLink, useLocation, useRouteMatch } from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   const location=useLocation()
-  
-  let match=useRouteMatch('/')
-
 
   return (
-    <header className={`${location.pathname==='/login'?'hidden':'flex'}  flex-col px-14  py-4 bg-white dark:bg-gray-800 dark:text-white h-screen max-w-full `}>
+    <header className={`${location.pathname==='/login'?'hidden':'flex'}  flex-col px-14  py-4 bg-white dark:bg-blueGray-800 dark:text-white min-h-screen max-w-full `}>
       {/* photo */}
       <div>
         <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 dark:bg-gray-600 shadow-xl ">

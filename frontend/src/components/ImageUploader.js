@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 const ImageUploader = () => {
   const [file, setFile] = useState("");
@@ -49,8 +49,8 @@ const ImageUploader = () => {
       {file ? (
         <img className="block w-28 h-28 rounded-full object-cover" src={file} alt="profile pic" />
       ) : (
-        <div className="flex justify-center items-center  w-28 h-28  bg-gray-300 dark:bg-gray-700 rounded-full">
-          <svg className="w-24 h-24 fill-current text-white dark:text-gray-800 rounded-full" focusable="false" viewBox="0 0 24 24" ><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+        <div className="flex justify-center items-center  w-28 h-28  bg-gray-300 dark:bg-blueGray-700 rounded-full">
+          <svg className="w-24 h-24 fill-current text-white dark:text-blueGray-800 rounded-full" focusable="false" viewBox="0 0 24 24" ><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
         </div>
       )}
       <label
