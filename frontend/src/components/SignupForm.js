@@ -20,7 +20,7 @@ const SignupForm = () => {
       className="w-full"
     >
       <div className=" space-y-6 ">
-        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
+        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 dark:text- absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
               className="w-6 h-6 fill-current text-gray-900 dark:text-white "
@@ -42,13 +42,13 @@ const SignupForm = () => {
                 message: "Enter a valid e-mail address",
               },
             })}
-            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
         </div>
         {errors.email && (<small className="error">{errors.email?.message}</small>)}
       </div>
       <div className="my-6">
-        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-3xl">
+        <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
               className="w-6 h-6 fill-current text-gray-900 dark:text-white "
@@ -67,7 +67,7 @@ const SignupForm = () => {
               required: "Please enter your password",
               minLength:6,
             })}
-            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-3xl text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-lg font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
           />
           <button
             type="button"
@@ -95,7 +95,7 @@ const SignupForm = () => {
         {errors.password && (<small className="error" >{errors.password?.message}</small>)}
       </div>
       <button
-        className="w-full bg-blue-500 text-white hover:bg-blue-600 font-semibold uppercase text-base px-8 py-4 rounded-3xl shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100"
+        className="w-full bg-blue-500 text-white hover:bg-blue-600 font-semibold uppercase text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100"
         type="submit" 
       >
         Sign in

@@ -9,7 +9,8 @@ const Login = () => {
     <section
       className="w-full h-screen lg:overflow-hidden"
       style={{
-        backgroundImage: "url('/assets/images/LoginBg.svg')",
+        backgroundColor:`${darkMode?'#111924':'#fff'}`,
+        backgroundImage: "url('/assets/images/BgTrans.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
