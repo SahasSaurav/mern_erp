@@ -1,6 +1,16 @@
 import User from "../model/User.js";
-import { createAccessToken, decodeToken } from "../utils/jwtToken.js";
-import { registerSchema, loginSchema } from "../utils/validation.js";
+import {
+  createAccessToken,
+  createForgotPasswordToken,
+  decodeToken,
+  verifyToken,
+} from "../utils/jwtToken.js";
+import {
+  registerSchema,
+  loginSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+} from "../utils/validation.js";
 
 // const registerUser = async (req, res, next) => {
 //   try {
@@ -93,8 +103,73 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-// const logoutUser=async(req,res,next)=>{
+const logoutUser = async (req, res, next) => {
+  try {
+    res.cookie("token", "", { httpOnly: true, maxAge: 1 });
+  } catch (err) {
+    next(err);
+  }
+};
 
-// }
+const forgotPassword = async (req, res, next) => {
+  try {
+    const result = await forgotPasswordSchema.validateAsync({ ...req.body });
+    const { email } = result;
 
-export {  loginUser };
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(400);
+      throw new Error("User is not registered");
+      return;
+    }
+    const token = await createForgotPasswordToken(user);
+    const resetPasswordLink = `${req.protocol}://${req.get(
+      "host"
+    )}/auth/reset-password/${user.id.toString()}/${token}`;
+    console.log({ resetPasswordLink });
+    //send email to user with resetPasswordLink
+    res.json({
+      message: "'Password reset link has been sent to your email",
+    });
+  } catch (err) {
+    if (err.isJoi === true) res.status(400);
+    next(err);
+  }
+};
+
+const resetPassword = async (req, res, next) => {
+  try {
+    const { id, token } = req.params;
+    const result = await resetPasswordSchema.validateAsync({ ...req.body });
+    const { password, repeatPassword } = result;
+    const isUserExist = await User.findById({ _id: id });
+    if (id !== isUserExist.id) {
+      res.status(401);
+      throw new Error("Unauthorized");
+    }
+    const payload = await verifyToken(
+      token,
+      process.env.FORGOT_PASSWORD_TOKEN_SECRET,
+      isUserExist.password
+    );
+    console.log({payload})
+    const user = await User.findOne({
+      _id: payload.sub,
+      email: payload.email,
+    });
+    if (user) {
+      user.password = password;
+      await user.save();
+      res.status(201);
+      res.json({ message: "Sucsessfully changed the password" });
+    } else {
+      res.status(401);
+      throw new Error("unAuthorized");
+    }
+  } catch (err) {
+    if (err.isJoi === true) res.status(400);
+    next(err);
+  }
+};
+
+export { loginUser, logoutUser, forgotPassword,resetPassword };

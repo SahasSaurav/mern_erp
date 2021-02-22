@@ -44,6 +44,28 @@ const createSignInToken = (user) => {
   });
 };
 
+const createForgotPasswordToken = (user) => {
+  return new Promise((resolve, reject) => {
+    const payload = {
+      sub: user._id,
+      name: user.name,
+      email: user.email,
+    };
+    const secret = process.env.FORGOT_PASSWORD_TOKEN_SECRET + user.password;
+    const options = {
+      expiresIn: "15m",
+    };
+    jwt.sign(payload, secret, options, (err, token) => {
+      if (err) {
+        console.error(err.message);
+        reject(new Error("InternalServerError"));
+        return;
+      }
+      resolve(token);
+    });
+  });
+};
+
 const decodeToken = (accessToken, secret) => {
   return new Promise((resolve, reject) => {
     jwt.verify(accessToken, secret, (err, payload) => {
@@ -70,4 +92,10 @@ const verifyToken = (token, secret, password) => {
   });
 };
 
-export { createAccessToken, createSignInToken, decodeToken, verifyToken };
+export {
+  createAccessToken,
+  createSignInToken,
+  createForgotPasswordToken,
+  decodeToken,
+  verifyToken,
+};

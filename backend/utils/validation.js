@@ -88,4 +88,36 @@ const addUserSchema = joi
   })
   .options({ abortEarly: false });
 
-export { registerSchema, loginSchema, addUserSchema };
+const forgotPasswordSchema = joi
+  .object({
+    email: joi.string().email().lowercase().required().label("Email").trim(),
+  })
+  .options({ abortEarly: false });
+
+const resetPasswordSchema = joi
+  .object({
+    password: joi
+      .string()
+      .pattern(
+        new RegExp(
+          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        )
+      )
+      .required()
+      .label("Password")
+      .trim(),
+    repeatPassword: joi
+      .string()
+      .pattern(
+        new RegExp(
+          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        )
+      )
+      .required()
+      .trim()
+      .valid(joi.ref("password"))
+      .label("Confirm Password"),
+  })
+  .options({ abortEarly: false });
+
+export { registerSchema, loginSchema, addUserSchema, forgotPasswordSchema,resetPasswordSchema };
