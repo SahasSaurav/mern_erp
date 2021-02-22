@@ -1,15 +1,26 @@
-import {useSelector} from 'react-redux'
+import {useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
+import { useSelector } from "react-redux";
 import SignupForm from "../components/SignupForm";
 
 const Login = () => {
-  const theme=useSelector(state=>state.theme);
-  const {darkMode}=theme
+  const theme = useSelector((state) => state.theme);
+  const userAuth = useSelector((state) => state.userAuth);
+  const { darkMode } = theme;
+  const {isAuthenicated} = userAuth
+  const history=useHistory()
+
+  useEffect(() => {
+   if(isAuthenicated){
+     history.push('/')
+   }
+  }, [isAuthenicated])
 
   return (
     <section
       className="w-full h-screen lg:overflow-hidden"
       style={{
-        backgroundColor:`${darkMode?'#111924':'#fff'}`,
+        backgroundColor: `${darkMode ? "#111924" : "#fff"}`,
         backgroundImage: "url('/assets/images/BgTrans.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -39,7 +50,9 @@ const Login = () => {
                 alt=""
               />
               <span className="absolute top-0 left-0  w-full h-full  bg-indigo-400  opacity-20 z-10"></span>
-             {darkMode && (<span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-10 z-10"></span>)}
+              {darkMode && (
+                <span className="absolute top-0 left-0  w-full h-full  bg-gray-700  opacity-10 z-10"></span>
+              )}
             </div>
           </div>
         </div>

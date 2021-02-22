@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions/userAction";
+import BouncingLoader from './BouncingLoader'
 
 const SignupForm = () => {
   const [passwordVisibility, setPasswordVisiblity] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors: formError } = useForm();
 
   const toggleVisibility = () => {
     const visibility = passwordVisibility;
     setPasswordVisiblity(!visibility);
   };
 
-  const onSubmitHandler = (data) => console.log(data);
+  const dispatch = useDispatch();
+  const { loading } = useSelector(
+    (state) => state.userLogin
+  );
+  const onSubmitHandler = (data) => {
+    dispatch(login(data.email, data.password));
+  };
 
   return (
     <form
@@ -28,11 +37,11 @@ const SignupForm = () => {
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
             </svg>
           </span>
           <input
-            type="email"
+            type="text"
             placeholder="Email"
             name="email"
             ref={register({
@@ -42,10 +51,14 @@ const SignupForm = () => {
                 message: "Enter a valid e-mail address",
               },
             })}
-            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${
+              formError.email ? "ring-red-400" : "ring-blue-400"
+            } ${formError.email ? "ring-2" : ""}  w-full pl-10`}
           />
         </div>
-        {errors.email && (<small className="error">{errors.email?.message}</small>)}
+        {formError.email && (
+          <small className="error">{formError.email?.message}</small>
+        )}
       </div>
       <div className="my-6">
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
@@ -65,9 +78,11 @@ const SignupForm = () => {
             name="password"
             ref={register({
               required: "Please enter your password",
-              minLength:6,
+              minLength: 8,
             })}
-            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${errors.email?'ring-red-400':'ring-blue-400'} ${errors.email?'ring-2':''}  w-full pl-10`}
+            className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${
+              formError.email ? "ring-red-400" : "ring-blue-400"
+            } ${formError.email ? "ring-2" : ""}  w-full pl-10`}
           />
           <button
             type="button"
@@ -92,13 +107,16 @@ const SignupForm = () => {
             </svg>
           </button>
         </div>
-        {errors.password && (<small className="error" >{errors.password?.message}</small>)}
+        {formError.password && (
+          <small className="error">{formError.password?.message}</small>
+        )}
       </div>
       <button
-        className="w-full bg-blue-500 text-white hover:bg-blue-600 font-semibold uppercase text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100"
-        type="submit" 
+        className={`w-full ${loading?'bg-blue-300':'bg-blue-500'} ${loading?'bg-blue-300':'hover:bg-blue-600'} text-white  font-semibold uppercase text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100`}
+        type="submit"
+        disabled={loading}
       >
-        Sign in
+        {loading?(<BouncingLoader />):'Sign In'}
       </button>
     </form>
   );

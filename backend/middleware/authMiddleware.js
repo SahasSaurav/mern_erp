@@ -4,6 +4,11 @@ import User from "../model/User.js";
 const requireAuth = async (req, res, next) => {
   try {
     let token = req.cookie.token;
+    if(!token){
+      res.status(401)
+      throw new Error('Unauthorized')
+      return ;
+    }
     const decoded = jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET,

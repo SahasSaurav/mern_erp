@@ -1,38 +1,39 @@
 import { useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import StudentService from "./pages/StudentService";
 import Profile from "./pages/Profile";
+import AuthRoute from "./components/AuthRoute";
+import AdminRoute from "./components/AdminRoute";
 
 import { peristTheme } from "./actions/themeAction";
-import Sidebar from "./components/Sidebar";
+import { authenicated } from "./actions/userAction";
 
 const App = () => {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
+  const userLogin = useSelector((state) => state.userLogin);
 
-  let history = useHistory();
-  const isAuthenticated = true;
+  const { darkMode } = theme;
+  const { token, expiresAt, userInfo } = userLogin;
 
   useEffect(() => {
     dispatch(peristTheme());
-  }, [dispatch]);
+  }, [dispatch, darkMode]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      history.push("/login");
-    }
-  }, [isAuthenticated]);
+    dispatch(authenicated);
+  }, [dispatch, token, expiresAt, userInfo]);
 
   return (
     <main className="flex">
-      <Sidebar />
       <Switch>
-        <Route exact path="/" component={Dashboard} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/exams" component={StudentService} />
-        <Route exact path="/profile" component={Profile} />
+        <AuthRoute exact path="/" component={Dashboard} />
+        <AuthRoute exact path="/exams" component={StudentService} />
+        <AuthRoute path="/profile" component={Profile} />
       </Switch>
     </main>
   );

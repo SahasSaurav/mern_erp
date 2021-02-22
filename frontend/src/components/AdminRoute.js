@@ -1,12 +1,20 @@
 import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const AuthRoute = ({ chilren, ...rest }) => {
-  const isauthenicated=true,
-  const isAdmin=false;
+const AdminRoute = ({ component:Component, ...rest }) => {
+  const userAuth = useSelector((state) => state.userAuth);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { isAuthenicated } = userAuth;
+  const { userInfo } = userLogin;
+
+  const isAdmin=userInfo.role==='admin'
+
   return (
     <Route
       {...rest}
-      render={() => (isauthenicated && isAdmin ? { chilren } : <Redirect to="/login" />)}
-    ></Route>
+      render={(props) => (isAuthenicated && isAdmin ? <Component {...props} /> : <Redirect to="/" />)}
+    />
   );
 };
+
+export default AdminRoute;

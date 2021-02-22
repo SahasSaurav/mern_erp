@@ -27,8 +27,9 @@ const addUser = async (req, res, next) => {
     // send signIn  link to user email address
 
 
-    
+
   } catch (err) {
+    if (err.isJoi === true) res.status(400);
     next(err);
   }
 };

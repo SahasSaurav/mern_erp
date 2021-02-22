@@ -1,11 +1,18 @@
+import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const AuthRoute = ({ chilren, ...rest }) => {
-  const isauthenicated=true,
+const AuthRoute = ({ component: Component, ...rest }) => {
+  const userAuth = useSelector((state) => state.userAuth);
+  const { isAuthenicated } = userAuth;
+
   return (
     <Route
       {...rest}
-      render={() => (isauthenicated ? { chilren } : <Redirect to="/login" />)}
-    ></Route>
+      render={(props) =>
+        isAuthenicated ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
   );
 };
+
+export default AuthRoute;
