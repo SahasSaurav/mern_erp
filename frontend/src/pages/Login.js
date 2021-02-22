@@ -21,12 +21,12 @@ const Login = () => {
           <div className="flex rounded-3xl overflow-hidden shadow-xl">
             <div className="flex flex-col justify-center items-center  max-w-sm w-full    bg-white dark:bg-blueGray-800 dark:text-white px-10 py-4 ">
               <img
-                className="h-24 w-24 mx-auto object-contain mt-8"
+                className="h-20 w-20 mx-auto object-contain mt-8"
                 src="/assets/images/bitlogo.png"
                 alt="logo"
               />
-              <h1 className="text-4xl  mx-auto mt-4 mb-2 ">Welcome</h1>
-              <h3 className="text-xl text-center mb-8">
+              <h1 className="text-3xl  mx-auto mt-4 mb-2 ">Welcome</h1>
+              <h3 className="text-lg text-center font-medium mb-8">
                 Birla Institute of Technology
               </h3>
               <SignupForm />
