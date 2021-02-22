@@ -3,9 +3,12 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from 'colors';
 import cookieParser from 'cookie-parser';
-import authRoute from './routes/authRoutes.js';
+import morgan from 'morgan';
 
 import connectDb from './config/db.js'
+import {notFound,errorHandler} from './middleware/errorMiddleware.js'
+import authRoute from './routes/authRoutes.js';
+import userRoute from './routes/userRoutes.js';
 
 // initializing dotenv file
 dotenv.config();
@@ -18,11 +21,19 @@ const app = express();
 // body parser middleware
 app.use(express.json());
 app.use(cookieParser())
+if(process.env.NODE_ENV==='development'){
+  app.use(morgan('dev'))
+}
 
 app.get("/", (req, res) => {
   res.send("hello");
 });
 app.use('/auth',authRoute)
+app.use('/user',userRoute)
+
+
+app.use(notFound)
+app.use(errorHandler)
 
 const port = process.env.PORT || 5000;
 

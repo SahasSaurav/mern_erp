@@ -22,9 +22,30 @@ const createAccessToken = (userId, userEmail, userRole) => {
   });
 };
 
-const decodeAccessToken = (accessToken) => {
+const createSignInToken = (user) => {
   return new Promise((resolve, reject) => {
-    const secret = process.env.ACCESS_TOKEN_SECRET;
+    const payload = {
+      sub: user._id,
+      name: user.name,
+      email: user.email,
+    };
+    const secret = process.env.SIGNIN_TOKEN_SECRET + user.password;
+    const options = {
+      expiresIn: "24h",
+    };
+    jwt.sign(payload, secret, options, (err, token) => {
+      if (err) {
+        console.error(err.message);
+        reject(new Error("InternalServerError"));
+        return;
+      }
+      resolve(token);
+    });
+  });
+};
+
+const decodeToken = (accessToken, secret) => {
+  return new Promise((resolve, reject) => {
     jwt.verify(accessToken, secret, (err, payload) => {
       if (err) {
         console.error(err.message);
@@ -36,4 +57,17 @@ const decodeAccessToken = (accessToken) => {
   });
 };
 
-export { createAccessToken, decodeAccessToken };
+const verifyToken = (token, secret, password) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret + password, (err, payload) => {
+      if (err) {
+        console.error(err.message);
+        reject(new Error("Unauthorized"));
+        return;
+      }
+      resolve(payload);
+    });
+  });
+};
+
+export { createAccessToken, createSignInToken, decodeToken, verifyToken };

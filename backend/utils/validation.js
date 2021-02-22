@@ -41,6 +41,17 @@ const registerSchema = joi
       .required()
       .label("Password")
       .trim(),
+    repeatPassword: joi
+      .string()
+      .pattern(
+        new RegExp(
+          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        )
+      )
+      .required()
+      .trim()
+      .valid(joi.ref("password"))
+      .label("Confirm Password"),
   })
   .options({ abortEarly: false });
 
@@ -60,4 +71,21 @@ const loginSchema = joi
   })
   .options({ abortEarly: false });
 
-export { registerSchema, loginSchema };
+const addUserSchema = joi
+  .object({
+    name: joi.string().required().label("Name").trim(),
+    email: joi.string().email().lowercase().required().label("Email").trim(),
+    password: joi
+      .string()
+      .pattern(
+        new RegExp(
+          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        )
+      )
+      .required()
+      .label("Password")
+      .trim(),
+  })
+  .options({ abortEarly: false });
+
+export { registerSchema, loginSchema, addUserSchema };

@@ -1,5 +1,8 @@
 import User from "../model/User.js";
-import { createAccessToken, decodeAccessToken } from "../utils/jwtToken.js";
+import {
+  createAccessToken,
+  decodeToken,
+} from "../utils/jwtToken.js";
 import { registerSchema, loginSchema } from "../utils/validation.js";
 
 const registerUser = async (req, res, next) => {
@@ -7,19 +10,22 @@ const registerUser = async (req, res, next) => {
     const result = await registerSchema.validateAsync({ ...req.body });
     const { email, name, password } = result;
     const userDoesExist = await User.findOne({ email });
-    if (userDoesExist) {
-      res.status(401);
-      throw new Error("Another user already exist with this email ");
-      return;
-    }
+    // if (userDoesExist) {
+    //   res.status(401);
+    //   throw new Error("Another user already exist with this email ");
+    //   return;
+    // }
     const user = await User.create({ name, email, password });
     const accessToken = await createAccessToken(
       user._id,
       user.email,
       user.role
     );
-    const decodedToken = await decodeAccessToken(accessToken);
-    const { exp } = decodedToken;
+    const decodedAccessToken = await decodeToken(
+      accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    const { exp } = decodedAccessToken;
     res.cookie("jwt", accessToken, {
       httpOnly: true,
       maxAge: 30 * 60 * 1000,
@@ -46,7 +52,7 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
   try {
     const result = await loginSchema.validateAsync({ ...req.body });
-    const { email, password } = result
+    const { email, password } = result;
     const user = await User.findOne({ email });
     if (!user) {
       res.status(400);
@@ -60,8 +66,11 @@ const loginUser = async (req, res, next) => {
         user.email,
         user.role
       );
-      const decodedToken = await decodeAccessToken(accessToken);
-      const { exp } = decodedToken;
+      const decodedAccessToken = await decodeToken(
+        accessToken,
+        process.env.ACCESS_TOKEN_SECRET
+      );
+      const { exp } = decodedAccessToken;
       res.cookie("jwt", accessToken, {
         httpOnly: true,
         maxAge: 30 * 60 * 1000,
@@ -85,13 +94,5 @@ const loginUser = async (req, res, next) => {
     next(err);
   }
 };
-
-const addUser=(req,res,next)=>{
-  try {
-    
-  } catch (err) {
-    
-  }
-}
 
 export { registerUser, loginUser };

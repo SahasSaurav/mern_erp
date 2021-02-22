@@ -1,10 +1,9 @@
-  
 import jwt from "jsonwebtoken";
-import  User from "../model/User.js";
+import User from "../model/User.js";
 
-const requireAuth=(req,res,next)=>{
-  try{
-    let token=req.cookie.token;
+const requireAuth = async (req, res, next) => {
+  try {
+    let token = req.cookie.token;
     const decoded = jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET,
@@ -21,12 +20,12 @@ const requireAuth=(req,res,next)=>{
     req.user = await User.findById(decoded).select(
       "-password -createdAt -updatedAt"
     );
-  }catch(err){
-    next(err)
+  } catch (err) {
+    next(err);
   }
-}
+};
 
-const admin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
   try {
     if (req.user && req.user.role === "admin") {
       next();
@@ -39,7 +38,4 @@ const admin = (req, res, next) => {
   }
 };
 
-module.exports = {
-  requireAuth,
-  admin,
-};
+export { requireAuth, isAdmin };
