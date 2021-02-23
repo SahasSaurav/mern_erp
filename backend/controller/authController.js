@@ -12,50 +12,43 @@ import {
   resetPasswordSchema,
 } from "../utils/validation.js";
 
-// const registerUser = async (req, res, next) => {
-//   try {
-//     const { id, token } = req.params;
-//     const result = await registerSchema.validateAsync({ ...req.body });
-//     const { email, name, password } = result;
-//     const userDoesExist = await User.findOne({ email });
-//     if (userDoesExist) {
-//       res.status(401);
-//       throw new Error("Another user already exist with this email ");
-//       return;
-//     }
-//     const user = await User.create({ name, email, password });
-//     const accessToken = await createAccessToken(
-//       user._id,
-//       user.email,
-//       user.role
-//     );
-//     const decodedAccessToken = await decodeToken(
-//       accessToken,
-//       process.env.ACCESS_TOKEN_SECRET
-//     );
-//     const { exp } = decodedAccessToken;
-//     res.cookie("token", accessToken, {
-//       httpOnly: true,
-//       maxAge: 30 * 60 * 1000,
-//     });
-//     res.json({
-//       userInfo: {
-//         id: user._id,
-//         name: user.name,
-//         email: user.email,
-//         role: user.role,
-//       },
-//       accessToken,
-//       expiresAt: exp,
-//     });
-//   } catch (err) {
-//     if (err.isJoi === true) {
-//       res.status(422); //Unprocessable Entity  error code 422
-//     }
-//     console.log(err);
-//     next(err);
-//   }
-// };
+const registerUser = async (req, res, next) => {
+  try {
+    const { id, token } = req.params;
+    const result = await registerSchema.validateAsync({ ...req.body });
+    const { email, password, repeatPassword } = result;
+    const isUserExist = await User.findById({ _id: id });
+    if ((id !== isUserExist._id) && (email!==isUserExist.email)) {
+      res.status(401);
+      throw new Error("Unauthorized");
+    }
+    const payload = await verifyToken(
+      token,
+      process.env.FORGOT_PASSWORD_TOKEN_SECRET,
+      isUserExist.password
+    );
+    console.log({ payload });
+    const user = await User.findOne({
+      _id: payload.sub,
+      email: payload.email,
+    });
+    if (user) {
+      user.password = password;
+      await user.save();
+      res.status(201);
+      res.json({ message: "Sucsessfully changed the password" });
+    } else {
+      res.status(401);
+      throw new Error("UnAuthorized");
+    }
+  } catch (err) {
+    if (err.isJoi === true) {
+      res.status(422); //Unprocessable Entity  error code 422
+    }
+    console.log(err);
+    next(err);
+  }
+};
 
 const loginUser = async (req, res, next) => {
   try {
@@ -106,6 +99,7 @@ const loginUser = async (req, res, next) => {
 const logoutUser = async (req, res, next) => {
   try {
     res.cookie("token", "", { httpOnly: true, maxAge: 1 });
+    res.json({message:'user logout'})
   } catch (err) {
     next(err);
   }
@@ -152,7 +146,7 @@ const resetPassword = async (req, res, next) => {
       process.env.FORGOT_PASSWORD_TOKEN_SECRET,
       isUserExist.password
     );
-    console.log({payload})
+    console.log({ payload });
     const user = await User.findOne({
       _id: payload.sub,
       email: payload.email,
@@ -172,4 +166,4 @@ const resetPassword = async (req, res, next) => {
   }
 };
 
-export { loginUser, logoutUser, forgotPassword,resetPassword };
+export { registerUser, loginUser, logoutUser, forgotPassword, resetPassword };

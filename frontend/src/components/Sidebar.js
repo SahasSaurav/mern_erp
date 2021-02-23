@@ -1,28 +1,33 @@
-import { NavLink, useLocation} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { logout } from "../actions/userAction";
 
 const Sidebar = () => {
-  const location=useLocation()
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   return (
-    <header className={`${location.pathname==='/login'?'hidden':'flex'}  flex-col px-14  py-4 bg-white dark:bg-blueGray-800 dark:text-white min-h-screen max-w-full `}>
+    <header className=" flex-col px-14  py-4 bg-white dark:bg-blueGray-800 dark:text-white min-h-screen max-w-full ">
       {/* photo */}
       <div>
         <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 dark:bg-gray-600 shadow-xl ">
-          <div
-            className="flex justify-center items-center text-white text-2xl tracking-widest font-medium w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md">EM</div>
+          <div className="flex justify-center items-center text-white text-2xl tracking-widest font-medium w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md">
+            EM
+          </div>
         </div>
         <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600 dark:text-white">
-          Elon Musk
+          {userInfo.name}
         </p>
       </div>
       <ul className=" flex flex-col  mt-32">
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className=" group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/"
-            className="flex flex-row justify-start  items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start  items-end text-gray-500 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400 "
-            isActive={(match)=>{
-              return match.isExact?true:false;
+            isActive={(match) => {
+              return match.isExact ? true : false;
             }}
           >
             <svg
@@ -36,10 +41,10 @@ const Sidebar = () => {
             <span>Overview</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className="group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/profile"
-            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
@@ -53,10 +58,10 @@ const Sidebar = () => {
             <span>Profile</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className="group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/academics"
-            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
@@ -70,10 +75,10 @@ const Sidebar = () => {
             <span>Academics</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className="group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/exams"
-            className="flex flex-row justify-start items-end  text-gray-600 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start items-end  text-gray-600 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
@@ -87,10 +92,10 @@ const Sidebar = () => {
             <span>Exams</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className="group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/fees"
-            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
@@ -104,10 +109,10 @@ const Sidebar = () => {
             <span>Fees</span>
           </NavLink>
         </li>
-        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+        <li className=" group py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
           <NavLink
             to="/feedback"
-            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 hover:text-blue-500"
+            className="flex flex-row justify-start items-end text-gray-500 dark:text-gray-50 group-hover:text-blue-400"
             activeClassName="text-blue-500 dark:text-blue-400"
           >
             <svg
@@ -120,6 +125,22 @@ const Sidebar = () => {
             </svg>
             <span>Feedback</span>
           </NavLink>
+        </li>
+        <li className="py-3 text-base font-medium tracking-wide text-gray-600 dark:text-gray-50">
+          <button
+            className="flex flex-row justify-start  items-end text-gray-500 dark:text-gray-50 group hover:text-red-400 focus:outline-none"
+            onClick={() => dispatch(logout())}
+          >
+            <svg
+              className="h-6 w-6 mr-4  fill-current group-hover:text-red-400"
+              focusable="false"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"></path>
+            </svg>
+            <span className="group-hover:text-red-400">Logout</span>
+          </button>
         </li>
       </ul>
     </header>

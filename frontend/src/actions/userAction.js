@@ -33,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
-    dispatch({type:USER_AUTH_SUCCESS})
+    dispatch({ type: USER_AUTH_SUCCESS });
     localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
     localStorage.setItem("expiresAt", JSON.stringify(data.expiresAt));
   } catch (err) {
@@ -44,25 +44,38 @@ export const login = (email, password) => async (dispatch) => {
           ? err.response.data.message
           : err.message,
     });
-    dispatch({type:USER_AUTH_FAIL})
+    dispatch({ type: USER_AUTH_FAIL });
   }
 };
 
-export const authenicated = () => (dispatch, getState) => {
+export const authenicated = () => async (dispatch, getState) => {
   const {
     userLogin: { userInfo, token, expiresAt },
   } = getState();
   if (!userInfo || !token || !expiresAt) {
     dispatch({ type: USER_AUTH_FAIL });
+    dispatch({type:USER_LOGOUT})
   }
-  const tokenExpired = new Date().getTime / 1000 < expiresAt;
+  const tokenExpired = new Date().getTime() / 1000 < expiresAt;
   if (tokenExpired) {
     dispatch({ type: USER_AUTH_SUCCESS });
   } else {
     dispatch({ type: USER_AUTH_FAIL });
+    dispatch({type:USER_LOGOUT})
   }
 };
 
-// const logout=()=>{
+export const logout = () => async (dispatch) => {
+  try {
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("expiresAt");
 
-// }
+    const a = await axios.delete("/auth/logout");
+    console.log({ a });
+    dispatch({ type: USER_AUTH_FAIL });
+    dispatch({ type: USER_LOGOUT });
+    console.log('hell')
+  } catch (err) {
+    console.error(err);
+  }
+};
