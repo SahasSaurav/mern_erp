@@ -1,16 +1,21 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userAction";
+import { register as registerUser } from "../actions/userAction";
 import BouncingLoader from "./BouncingLoader";
+import { useParams } from "react-router-dom";
 
 const RegisterForm = () => {
   const { register, handleSubmit, errors: formError, watch } = useForm();
 
+  const { id, token } = useParams();
+  console.log({ id, token });
+
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.userLogin);
+  const { loading } = useSelector((state) => state.userRegister);
   const onSubmitHandler = (data) => {
-    // dispatch(login(data.email, data.password));
+    dispatch(
+      registerUser(id, token, data.email, data.password, data.repeatPassword)
+    );
   };
 
   return (

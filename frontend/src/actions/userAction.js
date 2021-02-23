@@ -48,20 +48,54 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+export const register = (id,token,email, password, repeatPassword) => async (
+  dispatch
+) => {
+  try {
+    dispatch({
+      type: USER_REGISTER_REQUEST,
+    });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `/auth/register/${id}/${token}`,
+      { email, password, repeatPassword },
+      config
+    );
+
+    dispatch({
+      type: USER_REGISTER_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
 export const authenicated = () => async (dispatch, getState) => {
   const {
     userLogin: { userInfo, token, expiresAt },
   } = getState();
   if (!userInfo || !token || !expiresAt) {
     dispatch({ type: USER_AUTH_FAIL });
-    dispatch({type:USER_LOGOUT})
+    dispatch({ type: USER_LOGOUT });
   }
   const tokenExpired = new Date().getTime() / 1000 < expiresAt;
   if (tokenExpired) {
     dispatch({ type: USER_AUTH_SUCCESS });
   } else {
     dispatch({ type: USER_AUTH_FAIL });
-    dispatch({type:USER_LOGOUT})
+    dispatch({ type: USER_LOGOUT });
   }
 };
 
@@ -74,7 +108,7 @@ export const logout = () => async (dispatch) => {
     console.log({ a });
     dispatch({ type: USER_AUTH_FAIL });
     dispatch({ type: USER_LOGOUT });
-    console.log('hell')
+    console.log("hell");
   } catch (err) {
     console.error(err);
   }

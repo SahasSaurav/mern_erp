@@ -3,13 +3,13 @@ import User from "../model/User.js";
 
 const requireAuth = async (req, res, next) => {
   try {
-    let token = req.cookie.token;
+    let token = req.cookies.token;
     if(!token){
       res.status(401)
       throw new Error('Unauthorized')
       return ;
     }
-    const decoded = jwt.verify(
+    const decodedId= jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET,
       (err, payload) => {
@@ -19,12 +19,13 @@ const requireAuth = async (req, res, next) => {
           res.status(403);
           throw new Error(message);
         }
-        return payload.aud;
+        return payload.sub;
       }
     );
-    req.user = await User.findById(decoded).select(
+    req.user = await User.findById({_id:decodedId.toString()}).select(
       "-password -createdAt -updatedAt"
     );
+    next()
   } catch (err) {
     next(err);
   }

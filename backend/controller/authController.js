@@ -24,10 +24,9 @@ const registerUser = async (req, res, next) => {
     }
     const payload = await verifyToken(
       token,
-      process.env.FORGOT_PASSWORD_TOKEN_SECRET,
+      process.env.SIGNIN_TOKEN_SECRET,
       isUserExist.password
     );
-    console.log({ payload });
     const user = await User.findOne({
       _id: payload.sub,
       email: payload.email,

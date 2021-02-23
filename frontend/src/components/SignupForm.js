@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userAction";
-import BouncingLoader from './BouncingLoader'
+import BouncingLoader from "./BouncingLoader";
+import { Link } from "react-router-dom";
 
 const SignupForm = () => {
   const [passwordVisibility, setPasswordVisiblity] = useState(false);
@@ -15,9 +16,7 @@ const SignupForm = () => {
   };
 
   const dispatch = useDispatch();
-  const { loading } = useSelector(
-    (state) => state.userLogin
-  );
+  const { loading, error } = useSelector((state) => state.userLogin);
   const onSubmitHandler = (data) => {
     dispatch(login(data.email, data.password));
   };
@@ -28,7 +27,7 @@ const SignupForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="w-full"
     >
-      <div className=" space-y-6 ">
+      <div className=" space-y-5 ">
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 dark:text- absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
@@ -60,7 +59,7 @@ const SignupForm = () => {
           <small className="error">{formError.email?.message}</small>
         )}
       </div>
-      <div className="my-6">
+      <div className="my-6 ">
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">
             <svg
@@ -110,13 +109,23 @@ const SignupForm = () => {
         {formError.password && (
           <small className="error">{formError.password?.message}</small>
         )}
+        {error && (
+          <Link
+            className="mt-3  -mb-2 block text-right  hover:underline "
+            to="/forgot-password"
+          >
+            Forgot Password?
+          </Link>
+        )}
       </div>
       <button
-        className={`w-full ${loading?'bg-blue-300':'bg-blue-500'} ${loading?'bg-blue-300':'hover:bg-blue-600'} text-white  font-semibold uppercase text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100`}
+        className={`w-full ${loading ? "bg-blue-300" : "bg-blue-500"} ${
+          loading ? "bg-blue-300" : "hover:bg-blue-600"
+        } text-white  font-semibold uppercase text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 transition duration-100`}
         type="submit"
         disabled={loading}
       >
-        {loading?(<BouncingLoader />):'Sign In'}
+        {loading ? <BouncingLoader /> : "Sign In"}
       </button>
     </form>
   );

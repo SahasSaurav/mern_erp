@@ -1,21 +1,21 @@
 import {useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import { useSelector } from "react-redux";
-import SignupForm from "../components/SignupForm";
 import RegisterForm from '../components/RegisterForm';
 
 const Register = () => {
   const theme = useSelector((state) => state.theme);
-  const userAuth = useSelector((state) => state.userAuth);
+  const userRegister = useSelector((state) => state.userRegister);
   const { darkMode } = theme;
-  const {isAuthenicated} = userAuth
+  const {register} = userRegister;
   const history=useHistory()
 
+
   useEffect(() => {
-   if(isAuthenicated){
-     history.push('/')
+   if(register){
+     history.push('/login')
    }
-  }, [isAuthenicated])
+  }, [register,])
 
   return (
     <section
