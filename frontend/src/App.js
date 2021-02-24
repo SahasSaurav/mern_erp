@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -8,6 +9,7 @@ import StudentService from "./pages/StudentService";
 import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
 import AuthRoute from "./components/AuthRoute";
+import ResetPassword from "./pages/ResetPassword";
 import AdminRoute from "./components/AdminRoute";
 
 import { peristTheme } from "./actions/themeAction";
@@ -19,7 +21,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(peristTheme());
-  }, [dispatch, darkMode]);
+    // eslint-disable-next-line
+  }, [darkMode]);
 
   return (
     <main className="flex">
@@ -30,7 +33,11 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/auth/register/:id/:token" component={Register} />
-        {/* <Route exact path="/auth/reset-password/:id/:token" component={} /> */}
+        <Route
+          exact
+          path="/auth/reset-password/:id/:token"
+          component={ResetPassword}
+        />
       </Switch>
     </main>
   );

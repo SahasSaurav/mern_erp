@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import BouncingLoader from "../components/BouncingLoader";
+import { forgotPassword } from "../actions/userAction";
 
 const ForgotPassword = () => {
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
-  const userAuth = useSelector((state) => state.userAuth);
+  const userForgotPassword = useSelector((state) => state.userForgotPassword);
   const { darkMode } = theme;
-  const { isAuthenicated } = userAuth;
   const history = useHistory();
 
   const loading = false;
@@ -16,7 +17,7 @@ const ForgotPassword = () => {
   const { register, handleSubmit, errors: formError } = useForm();
 
   const onSubmitHandler = (data) => {
-    // dispatch(login(data.email, data.password));
+    dispatch(forgotPassword(data.email));
   };
 
   return (

@@ -6,6 +6,8 @@ import {
   userLoginReducer,
   userAuthReducer,
   userRegisterReducer,
+  userForgotPasswordReducer,
+  userResetPasswodReducer,
 } from "./reducer/userReducer";
 
 const reducer = combineReducers({
@@ -13,6 +15,8 @@ const reducer = combineReducers({
   userAuth: userAuthReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userForgotPassword: userForgotPasswordReducer,
+  userResetPassword: userResetPasswodReducer,
 });
 
 const initialState = {};

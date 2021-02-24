@@ -9,6 +9,12 @@ import {
   USER_REGISTER_FAIL,
   USER_AUTH_SUCCESS,
   USER_AUTH_FAIL,
+  USER_FORGOT_PASSWORD_REQUEST,
+  USER_FORGOT_PASSWORD_SUCCESS,
+  USER_FORGOT_PASSWORD_FAIL,
+  USER_RESET_PASSWORD_REQUEST,
+  USER_RESET_PASSWORD_SUCCESS,
+  USER_RESET_PASSWORD_FAIL,
 } from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
@@ -34,6 +40,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
     dispatch({ type: USER_AUTH_SUCCESS });
+    sessionStorage.setItem("token", JSON.stringify(data.accessToken));
     localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
     localStorage.setItem("expiresAt", JSON.stringify(data.expiresAt));
   } catch (err) {
@@ -48,7 +55,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const register = (id,token,email, password, repeatPassword) => async (
+export const register = (id, token, email, password, repeatPassword) => async (
   dispatch
 ) => {
   try {
@@ -73,7 +80,7 @@ export const register = (id,token,email, password, repeatPassword) => async (
     });
   } catch (err) {
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: USER_REGISTER_FAIL,
       payload:
         err.response && err.response.data.message
           ? err.response.data.message
@@ -101,6 +108,7 @@ export const authenicated = () => async (dispatch, getState) => {
 
 export const logout = () => async (dispatch) => {
   try {
+    sessionStorage.removeItem("token");
     localStorage.removeItem("userInfo");
     localStorage.removeItem("expiresAt");
 
@@ -111,5 +119,59 @@ export const logout = () => async (dispatch) => {
     console.log("hell");
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_FORGOT_PASSWORD_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `/auth/forgot-password`,
+      { email },
+      config
+    );
+    dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS });
+  } catch (err) {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const resetPassword = (id, token, password, repeatPassword) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: USER_RESET_PASSWORD_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `/auth/reset-password/${id}/${token}`,
+      { password, repeatPassword },
+      config
+    );
+    dispatch({ type: USER_RESET_PASSWORD_SUCCESS });
+  } catch (err) {
+    dispatch({
+      type: USER_RESET_PASSWORD_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
   }
 };

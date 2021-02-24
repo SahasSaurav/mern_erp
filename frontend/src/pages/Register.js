@@ -1,21 +1,23 @@
-import {useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from "../components/RegisterForm";
+
+
 
 const Register = () => {
   const theme = useSelector((state) => state.theme);
   const userRegister = useSelector((state) => state.userRegister);
   const { darkMode } = theme;
-  const {register} = userRegister;
-  const history=useHistory()
-
+  const { register } = userRegister;
+  const history = useHistory();
 
   useEffect(() => {
-   if(register){
-     history.push('/login')
-   }
-  }, [register,])
+    if (register) {
+      history.push("/login");
+    }
+    // eslint-disable-next-line
+  }, [register]);
 
   return (
     <section
@@ -31,8 +33,6 @@ const Register = () => {
       <div className="container mx-auto w-full h-screen">
         <div className="flex justify-center items-center w-full h-full ">
           <div className="flex rounded-3xl overflow-hidden shadow-xl">
-           
-
             <div className="relative  max-w-lg w-full   bg-red-200 ">
               <img
                 className="w-full h-full  object-cover "
@@ -54,7 +54,7 @@ const Register = () => {
               <h3 className="text-lg text-center font-medium mb-8">
                 Birla Institute of Technology
               </h3>
-                <RegisterForm />
+              <RegisterForm />
             </div>
           </div>
         </div>
@@ -63,4 +63,4 @@ const Register = () => {
   );
 };
 
-export default Register ;
+export default Register;
