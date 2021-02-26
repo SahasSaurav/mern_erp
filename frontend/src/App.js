@@ -1,18 +1,19 @@
-import { useEffect } from "react";
+import { useEffect,Suspense,lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import StudentService from "./pages/StudentService";
-import Profile from "./pages/Profile";
-import ForgotPassword from "./pages/ForgotPassword";
 import AuthRoute from "./components/AuthRoute";
-import ResetPassword from "./pages/ResetPassword";
 import AdminRoute from "./components/AdminRoute";
-
 import { peristTheme } from "./actions/themeAction";
+
+const Dashboard=lazy(()=>import("./pages/Dashboard")) 
+const Login=lazy(()=>import ("./pages/Login")) 
+const Register=lazy(()=>import("./pages/Register") ) 
+const StudentService=lazy(()=>import ("./pages/StudentService")) 
+const Profile=lazy(()=>import ("./pages/Profile")) 
+const ForgotPassword=lazy(()=>import('./pages/ForgotPassword'))
+const ResetPassword=lazy(()=>import('./pages/ResetPassword'))
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const App = () => {
 
   return (
     <main className="flex">
+    <Suspense fallback={<div>Loading</div>}>
       <Switch>
         <AuthRoute exact path="/" component={Dashboard} />
         <AuthRoute exact path="/exams" component={StudentService} />
@@ -39,6 +41,7 @@ const App = () => {
           component={ResetPassword}
         />
       </Switch>
+      </Suspense>
     </main>
   );
 };

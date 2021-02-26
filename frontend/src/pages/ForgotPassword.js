@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import BouncingLoader from "../components/BouncingLoader";
@@ -7,12 +5,8 @@ import { forgotPassword } from "../actions/userAction";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme);
-  const userForgotPassword = useSelector((state) => state.userForgotPassword);
-  const { darkMode } = theme;
-  const history = useHistory();
-
-  const loading = false;
+  const { darkMode } = useSelector((state) => state.theme);
+  const { loading } = useSelector((state) => state.userForgotPassword);
 
   const { register, handleSubmit, errors: formError } = useForm();
 

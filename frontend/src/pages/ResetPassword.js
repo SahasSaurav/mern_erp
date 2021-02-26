@@ -1,20 +1,31 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import BouncingLoader from "../components/BouncingLoader";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { resetPassword } from "../actions/userAction";
 
 const ResetPassword = () => {
   const { register, handleSubmit, errors: formError, watch } = useForm();
 
   const { id, token } = useParams();
+  const history = useHistory();
 
   const dispatch = useDispatch();
   const { darkMode } = useSelector((state) => state.theme);
-  const { loading } = useSelector((state) => state.userResetPassword);
+  const { loading, passwordChanged } = useSelector(
+    (state) => state.userResetPassword
+  );
   const onSubmitHandler = (data) => {
     dispatch(resetPassword(id, token, data.password, data.repeatPassword));
   };
+
+  useEffect(() => {
+    if (passwordChanged) {
+      history.push("/login");
+    }
+  }, [passwordChanged]);
+
   return (
     <section
       className="w-full h-screen lg:overflow-hidden"

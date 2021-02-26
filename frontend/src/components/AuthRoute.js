@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Redirect, useLocation } from "react-router-dom";
-import { authenicated, logout } from "../actions/userAction";
+import { authenicated} from "../actions/userAction";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();

@@ -1,20 +1,19 @@
-import {useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SignupForm from "../components/SignupForm";
 
 const Login = () => {
-  const theme = useSelector((state) => state.theme);
-  const userAuth = useSelector((state) => state.userAuth);
-  const { darkMode } = theme;
-  const {isAuthenicated} = userAuth
-  const history=useHistory()
+  const { darkMode } = useSelector((state) => state.theme);
+  const { isAuthenicated } = useSelector((state) => state.userAuth);
+  const history = useHistory();
 
   useEffect(() => {
-   if(isAuthenicated){
-     history.push('/')
-   }
-  }, [isAuthenicated])
+    if (isAuthenicated) {
+      history.push("/");
+    }
+    //eslint-disable-next-line 
+  }, [isAuthenicated]);
 
   return (
     <section
