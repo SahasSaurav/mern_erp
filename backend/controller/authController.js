@@ -74,6 +74,8 @@ const loginUser = async (req, res, next) => {
       res.cookie("token", accessToken, {
         httpOnly: true,
         maxAge: 30 * 60 * 1000,
+        sameSite:'strict',
+        //secure: true, / / uncomment it when ssl certificate is done
       });
       res.json({
         userInfo: {

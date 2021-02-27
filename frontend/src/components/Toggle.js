@@ -23,8 +23,8 @@ const Toggle = () => {
   useEffect(() => {
     const theme=localStorage.getItem('theme')
     if(theme){
-      const {darkMode:isDark}=JSON.parse(theme);
-      toggleRef.current.checked=isDark;
+      const darkMode=JSON.parse(theme);
+      toggleRef.current.checked=darkMode;
     }
   }, []);
 

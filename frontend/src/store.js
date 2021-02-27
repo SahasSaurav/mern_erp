@@ -19,9 +19,18 @@ const reducer = combineReducers({
   userResetPassword: userResetPasswodReducer,
 });
 
-const initialState = {};
+console.log(localStorage.getItem('theme'))
+
+const initialState = {
+  userLogin:{ 
+    userInfo: localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):{},
+    expiresAt:localStorage.getItem('expiresAt')?JSON.parse(localStorage.getItem('expiresAt')):{},
+    token: sessionStorage.getItem('token')?JSON.parse(sessionStorage.getItem('token')):''
+  },
+}
 
 const middleware = [thunk];
+
 
 const store = createStore(
   reducer,

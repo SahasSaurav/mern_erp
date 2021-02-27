@@ -34,6 +34,19 @@ const addUser = async (req, res, next) => {
   }
 };
 
+const deleteUser=(req,res,next)=>{
+  try{
+    const {id}=req.params
+    const  userDoesExist=User.findById({_id:id});
+    if(!userDoesExist){
+      res.status(404)
+      throw new Error('User does not exist')
+    }
+    
+  }catch(err){
+
+  }
+}
 
 
 export { addUser };

@@ -106,6 +106,8 @@ export const authenicated = () => async (dispatch, getState) => {
   }
 };
 
+
+
 export const logout = () => async (dispatch) => {
   try {
     sessionStorage.removeItem("token");
