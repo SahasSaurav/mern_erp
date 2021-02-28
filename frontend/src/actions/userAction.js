@@ -93,6 +93,10 @@ export const authenicated = () => async (dispatch, getState) => {
   const {
     userLogin: { userInfo, token, expiresAt },
   } = getState();
+  if(!token){
+    dispatch({ type: USER_AUTH_FAIL });
+    dispatch({ type: USER_LOGOUT });
+  }
   if (!userInfo || !token || !expiresAt) {
     dispatch({ type: USER_AUTH_FAIL });
     dispatch({ type: USER_LOGOUT });

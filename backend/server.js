@@ -4,6 +4,12 @@ import dotenv from "dotenv";
 import colors from 'colors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import helmet from 'helmet'
+import mongoSanitize from 'express-mongo-sanitize'
+import xss from 'xss-clean'
+import hpp from 'hpp'
+import cors from 'cors'
+import rateLimit from 'express-rate-limit'
 
 import connectDb from './config/db.js'
 import {notFound,errorHandler} from './middleware/errorMiddleware.js'
@@ -18,12 +24,31 @@ connectDb()
 
 const app = express();
 
-// body parser middleware
-app.use(express.json());
+// body parser middleware to parse json data
+app.use(express.json({limit:'200kb'}));
+// to parse cookie 
 app.use(cookieParser())
+// api logger in development mode
 if(process.env.NODE_ENV==='development'){
   app.use(morgan('dev'))
 }
+// Enable CORS
+app.use(cors())
+// Sanitize data
+app.use(mongoSanitize())
+// set security headers
+app.use(helmet())
+//prevent xss attacks
+app.use(xss())
+// Prevent http param pollution
+app.use(hpp())
+// Rate limiting to prevent brute forse attack
+const limiter= rateLimit({  
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!'
+})
+app.use(limiter)
 
 app.get("/", (req, res) => {
   res.send("hello");

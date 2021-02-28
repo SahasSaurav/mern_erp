@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AuthRoute from "./components/AuthRoute";
 import AdminRoute from "./components/AdminRoute";
 import { peristTheme } from "./actions/themeAction";
+import { logout } from "./actions/userAction";
 
 const Dashboard=lazy(()=>import("./pages/Dashboard")) 
 const Login=lazy(()=>import ("./pages/Login")) 

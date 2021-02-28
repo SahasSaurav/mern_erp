@@ -17,7 +17,7 @@ const registerUser = async (req, res, next) => {
     const { id, token } = req.params;
     const result = await registerSchema.validateAsync({ ...req.body });
     const { email, password, repeatPassword } = result;
-    const isUserExist = await User.findById({ _id: id });
+    const isUserExist = await User.findById({ _id: id }).select('+password');
     if ((id !== isUserExist._id) && (email!==isUserExist.email)) {
       res.status(401);
       throw new Error("Unauthorized");
@@ -53,12 +53,12 @@ const loginUser = async (req, res, next) => {
   try {
     const result = await loginSchema.validateAsync({ ...req.body });
     const { email, password } = result;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       res.status(400);
       throw new Error("User is not registered");
     }
-    const isMatch = await user.isValidPassword(password);
+    const isMatch = await user.isValidPassword(password,user.password);
 
     if (user && isMatch) {
       const accessToken = await createAccessToken(
@@ -75,7 +75,7 @@ const loginUser = async (req, res, next) => {
         httpOnly: true,
         maxAge: 30 * 60 * 1000,
         sameSite:'strict',
-        //secure: true, / / uncomment it when ssl certificate is done
+        secure: process.env.NODE_ENV==='production'?true:false, 
       });
       res.json({
         userInfo: {
@@ -111,7 +111,7 @@ const forgotPassword = async (req, res, next) => {
     const result = await forgotPasswordSchema.validateAsync({ ...req.body });
     const { email } = result;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       res.status(400);
       throw new Error("User is not registered");

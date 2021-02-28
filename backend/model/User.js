@@ -16,12 +16,16 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select:false,
     },
     role: {
       type: String,
       default: "user",
       enum: ["user", "admin"],
     },
+    profilePic:{
+      type:String,
+    }
   },
   { timestamps: true }
 );
@@ -29,7 +33,7 @@ const userSchema = mongoose.Schema(
 userSchema.pre("save", async function (next) {
   try {
     if (!this.isModified("password")) {
-      next();
+     return next();
     }
     const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(this.password, salt);
@@ -39,9 +43,9 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function (enteredPassword) {
+userSchema.methods.isValidPassword = async function (enteredPassword,userPassword) {
   try {
-    return await bcrypt.compare(enteredPassword, this.password);
+    return await bcrypt.compare(enteredPassword, userPassword);
   } catch (err) {
     throw err;
   }
