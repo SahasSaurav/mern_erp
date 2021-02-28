@@ -32,12 +32,12 @@ app.use(cookieParser())
 if(process.env.NODE_ENV==='development'){
   app.use(morgan('dev'))
 }
+// set security headers
+app.use(helmet())
 // Enable CORS
 app.use(cors())
 // Sanitize data
 app.use(mongoSanitize())
-// set security headers
-app.use(helmet())
 //prevent xss attacks
 app.use(xss())
 // Prevent http param pollution
@@ -46,7 +46,12 @@ app.use(hpp())
 const limiter= rateLimit({  
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!'
+  message:{
+    success: false,
+    status:429,
+    message:'Too many requests from this IP, please try again in an hour!',
+  }
+   
 })
 app.use(limiter)
 

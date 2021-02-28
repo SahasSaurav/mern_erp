@@ -48,5 +48,12 @@ const deleteUser=(req,res,next)=>{
   }
 }
 
+// const uploadPhoto=(req,res,next){
+//   try {
+    
+//   } catch (err) {
+//     next(err)
+//   }
+// }
 
 export { addUser };

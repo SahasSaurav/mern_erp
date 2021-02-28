@@ -3,12 +3,16 @@ import User from "../model/User.js";
 
 const requireAuth = async (req, res, next) => {
   try {
-    let token = req.cookies.token;
-    if(!token){
+    let bearerToken =req.headers.authorization ;
+    if(!bearerToken){
       res.status(401)
       throw new Error('Unauthorized')
       return ;
     }
+    console.log('hello')
+    console.log(bearerToken)
+   if(bearerToken && bearerToken.startsWith('Bearer')){
+    const token=bearerToken.split(' ')[1]
     const decodedId= jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET,
@@ -26,6 +30,7 @@ const requireAuth = async (req, res, next) => {
       "-password -createdAt -updatedAt"
     );
     next()
+   }
   } catch (err) {
     next(err);
   }

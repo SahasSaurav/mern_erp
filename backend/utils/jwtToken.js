@@ -9,7 +9,7 @@ const createAccessToken = (userId, userEmail, userRole) => {
     };
     const secret = process.env.ACCESS_TOKEN_SECRET;
     const options = {
-      expiresIn: "30m",
+      expiresIn: "9m",
     };
     jwt.sign(payload, secret, options, (err, token) => {
       if (err) {
@@ -19,6 +19,25 @@ const createAccessToken = (userId, userEmail, userRole) => {
       }
       resolve(token);
     });
+  });
+};
+
+const createRefreshToken = (userId) => {
+  return new Promise((reslove, reject) => {
+    const payload = {
+      sub: userId,
+    };
+    const secret = process.env.REFRESH_TOKEN_SECRET;
+    const options = {
+      expiresIn: "45m",
+    };
+    jwt.sign(payload, secret, options, (err, token) => {
+      if (err) {
+        console.error(err);
+        reject(new Error("InternalServerError"));
+      }
+      reslove(token);
+      });
   });
 };
 
@@ -94,6 +113,7 @@ const verifyToken = (token, secret, password) => {
 
 export {
   createAccessToken,
+  createRefreshToken,
   createSignInToken,
   createForgotPasswordToken,
   decodeToken,
