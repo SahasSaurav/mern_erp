@@ -14,15 +14,7 @@ export const themeReducer = (state = { darkMode }, action) => {
       return { darkMode: true };
     case SET_LIGHT_MODE:
       root.classList.remove("dark");
-      return { darkMode: false };
-    case PERSIST_THEME:
-      const isDark = action.payload;
-      if (isDark === true) {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
-      return {darkMode:action.payload};
+      return { darkMode: false };   
     default:
       return { state };
   }

@@ -3,6 +3,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  USER_REFRESH_TOKEN,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
@@ -14,6 +15,9 @@ import {
   USER_RESET_PASSWORD_REQUEST,
   USER_RESET_PASSWORD_SUCCESS,
   USER_RESET_PASSWORD_FAIL,
+  USER_TOKEN_REQUEST,
+  USER_TOKEN_SUCCESS,
+  USER_TOKEN_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -25,12 +29,20 @@ export const userLoginReducer = (state = {}, action) => {
         loading: false,
         userInfo: action.payload.userInfo,
         expiresAt: action.payload.expiresAt,
-        token: action.payload.accessToken,
+        accessToken: action.payload.accessToken,
+        refreshToken:action.payload.refreshToken
       };
     case USER_LOGIN_FAIL:
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
       return {};
+    case USER_REFRESH_TOKEN:
+      return {
+        loading:false, userInfo: action.payload.userInfo,
+        expiresAt: action.payload.expiresAt,
+        accessToken: action.payload.accessToken,
+        refreshToken:action.payload.refreshToken
+      };
     default:
       return state;
   }
@@ -56,9 +68,9 @@ export const userRegisterReducer = (state = {}, action) => {
 export const userAuthReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_AUTH_SUCCESS:
-      return { isAuthenicated: true };
+      return { isAuthenticated: true };
     case USER_AUTH_FAIL:
-      return { isAuthenicated: false };
+      return { isAuthenticated: false };
     default:
       return state;
   }
@@ -92,3 +104,17 @@ export const userResetPasswodReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// redducer to access token from refresh token
+export const userRefreshTokenReducer=(state={},action)=>{
+  switch(action.type){
+    case USER_TOKEN_REQUEST:
+      return {loading:true,refreshed:false}
+    case USER_TOKEN_SUCCESS:
+      return {loading:false, refreshed:true}
+    case USER_TOKEN_FAIL:
+      return {loading:false,error:action.payload,refreshed:false}
+    default:
+      return state
+  }
+}

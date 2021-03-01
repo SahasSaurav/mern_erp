@@ -18,8 +18,6 @@ const Toggle = () => {
 
   const toggleRef= useRef()
 
-  
-
   useEffect(() => {
     const theme=localStorage.getItem('theme')
     if(theme){

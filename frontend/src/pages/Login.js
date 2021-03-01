@@ -5,15 +5,15 @@ import SignupForm from "../components/SignupForm";
 
 const Login = () => {
   const { darkMode } = useSelector((state) => state.theme);
-  const { isAuthenicated } = useSelector((state) => state.userAuth);
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
   const history = useHistory();
 
   useEffect(() => {
-    if (isAuthenicated) {
+    if (isAuthenticated) {
       history.push("/");
     }
     //eslint-disable-next-line 
-  }, [isAuthenicated]);
+  }, [isAuthenticated]);
 
   return (
     <section

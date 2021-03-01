@@ -72,7 +72,7 @@ const loginUser = async (req, res, next) => {
     }
     // check the password whether match entered password in form with password stored in the db 
     const isMatch = await user.isValidPassword(password,user.password);
-    // if user avaiable and passord match then give login access
+    // if user avaiable and password match then give login access
     if (user && isMatch) {
       // create access token 
       const accessToken = await createAccessToken(
@@ -124,7 +124,7 @@ const logoutUser = async (req, res, next) => {
   try {
     // delete refresh token from httpOnly cookie
     res.cookie("token", "", { httpOnly: true, maxAge: 1 });
-    // remove the refresh token db
+    // remove the refresh token from db
     const user= await User.findByIdAndUpdate(req.user.id,{refreshToken:null})
     res.json({message:'user logout'})
   } catch (err) {
@@ -202,8 +202,6 @@ const resetPassword = async (req, res, next) => {
 
 const refreshAccesToken=async(req,res,next)=>{
   try {
-    console.log('hi')
-    console.log(req.cookies)
     const refreshToken=req.cookies.token
     if(!refreshToken){
       res.status(401)
@@ -213,21 +211,16 @@ const refreshAccesToken=async(req,res,next)=>{
     // decode the refresh token
     const decodedRefreshToken=await decodeToken(refreshToken, process.env.REFRESH_TOKEN_SECRET)
     const {exp,sub,email,role}=decodedRefreshToken;
-    console.log('fuck no error')
+    //encrypting the refresh token
+    const encryptedRefreshToken=crypto.createHash('sha256').update(refreshToken)
     // find the user from id and refesh token
     const user=await User.findOne({
       _id:sub,
-      refreshToken:crypto
-      .createHash('sha256')
-      .update(refreshToken)
-      .digest('hex')
-    })
+      refreshToken:encryptedRefreshToken
+    }).select('-pass')
     // check the encrypted refresh token match with refresh token of user present in the db
     // as crypto module doesnot have the built comapre function to match input with encrypted field
-    const refreshTokenMatch=crypto
-      .createHash('sha256')
-      .update(refreshToken)
-      .digest('hex') === user.refreshToken ;
+    const refreshTokenMatch= encryptedRefreshToken === user.refreshToken ;
       console.log({refreshTokenMatch})
     // blacklist the refresh token which is not present in the db
      if(!user || !refreshTokenMatch){
@@ -243,11 +236,19 @@ const refreshAccesToken=async(req,res,next)=>{
         email,
         role
       );
+      const newRefreshToken= await createRefreshToken(sub); 
       //send it to the client
       const decodedNewAccessToken= await decodeToken(newAccessToken,process.env.ACCESS_TOKEN_SECRET)
       res.json({
+        userInfo:{
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
         accessToken:newAccessToken,
-        expiresAt:decodedNewAccessToken.exp
+        expiresAt:decodedNewAccessToken.exp,
+        refreshToken:newRefreshToken,
       })
     }else{
       res.status(401)

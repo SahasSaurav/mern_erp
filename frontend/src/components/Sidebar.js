@@ -17,7 +17,7 @@ const Sidebar = () => {
           </div>
         </div>
         <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600 dark:text-white">
-          {userInfo.name}
+          {userInfo?userInfo.name:''}
         </p>
       </div>
       <ul className=" flex flex-col  mt-32">

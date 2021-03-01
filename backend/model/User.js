@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-//method to hash the password before saving to the db 
+// using mongoose hook to hash the password before saving to the db 
 userSchema.pre("save", async function (next) {
   try {
     if (!this.isModified("password")) {
@@ -50,7 +50,20 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// method the encrypt the refesh token before saving to the db
+// using mongoose hook  to format the name
+userSchema.pre("save", function (next) {
+  try {
+    if (!this.isModified("name")) {
+     return next();
+    }
+    const formattedName =this.name.split(' ').map(name=>name[0].toUpperCase()+name.slice(1)).join('')
+    this.name = formattedName;
+  } catch (err) {
+    next(err);
+  }
+});
+
+//  using mongoose hook to encrypt the refesh token before saving to the db
 userSchema.pre('save',async function(next){
   try{
   if(!this.isModified('refreshToken')){

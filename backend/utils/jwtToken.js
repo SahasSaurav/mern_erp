@@ -9,7 +9,7 @@ const createAccessToken = (userId, userEmail, userRole) => {
     };
     const secret = process.env.ACCESS_TOKEN_SECRET;
     const options = {
-      expiresIn: "9m",
+      expiresIn: "50s",
     };
     jwt.sign(payload, secret, options, (err, token) => {
       if (err) {
@@ -29,7 +29,7 @@ const createRefreshToken = (userId) => {
     };
     const secret = process.env.REFRESH_TOKEN_SECRET;
     const options = {
-      expiresIn: "45m",
+      expiresIn: "20m",
     };
     jwt.sign(payload, secret, options, (err, token) => {
       if (err) {

@@ -8,6 +8,7 @@ import {
   userRegisterReducer,
   userForgotPasswordReducer,
   userResetPasswodReducer,
+  userRefreshTokenReducer,
 } from "./reducer/userReducer";
 
 const reducer = combineReducers({
@@ -17,16 +18,18 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userForgotPassword: userForgotPasswordReducer,
   userResetPassword: userResetPasswodReducer,
+  userRefreshToken:userRefreshTokenReducer,
 });
 
-console.log(localStorage.getItem('theme'))
+const getTheme=()=>{
+  const theme=localStorage.getItem('theme')
+  return theme?JSON.parse(theme):undefined
+}
 
 const initialState = {
-  userLogin:{ 
-    userInfo: localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):{},
-    expiresAt:localStorage.getItem('expiresAt')?JSON.parse(localStorage.getItem('expiresAt')):{},
-    token: sessionStorage.getItem('token')?JSON.parse(sessionStorage.getItem('token')):''
-  },
+  theme:{
+    darkMode:getTheme()
+  }
 }
 
 const middleware = [thunk];
