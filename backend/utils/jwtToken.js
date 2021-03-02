@@ -9,7 +9,7 @@ const createAccessToken = (userId, userEmail, userRole) => {
     };
     const secret = process.env.ACCESS_TOKEN_SECRET;
     const options = {
-      expiresIn: "50s",
+      expiresIn: "30s",
     };
     jwt.sign(payload, secret, options, (err, token) => {
       if (err) {

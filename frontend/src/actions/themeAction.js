@@ -14,11 +14,10 @@ export const setLightMode = () => async (dispatch) => {
   dispatch({ type: SET_LIGHT_MODE });
 };
 
-export const peristTheme=()=>async(dispatch,getState)=>{
-  const {theme:{darkMode}}=getState()
-  if(darkMode){
-    dispatch({ type: SET_DARK_MODE });
-  }else{
-  dispatch({ type: SET_LIGHT_MODE });
+export const peristTheme=()=>async(dispatch)=>{
+  const theme=localStorage.getItem('theme')
+  if(theme){
+    const {darkMode}=JSON.parse(theme) 
+    dispatch({type:PERSIST_THEME,payload:darkMode})
   }
 }

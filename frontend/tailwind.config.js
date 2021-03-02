@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "matt-black": "#222429",
+        "matt-black": "#111924",
         blueGray: colors.blueGray
       },
       fontFamily: {

@@ -13,7 +13,6 @@ import {
 
 const reducer = combineReducers({
   theme: themeReducer,
-  userAuth: userAuthReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userForgotPassword: userForgotPasswordReducer,
@@ -21,16 +20,7 @@ const reducer = combineReducers({
   userRefreshToken:userRefreshTokenReducer,
 });
 
-const getTheme=()=>{
-  const theme=localStorage.getItem('theme')
-  return theme?JSON.parse(theme):undefined
-}
-
-const initialState = {
-  theme:{
-    darkMode:getTheme()
-  }
-}
+const initialState = {}
 
 const middleware = [thunk];
 

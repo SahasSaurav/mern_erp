@@ -85,12 +85,18 @@ const loginUser = async (req, res, next) => {
       //save the refresh token to db for blacklist the refresh token
       user.refreshToken= refreshToken
       await user.save() 
-      // decode the acces token to send expiry time to the client
+      // decode the access token to send expiry time to the client
       const decodedAccessToken = await decodeToken(
         accessToken,
         process.env.ACCESS_TOKEN_SECRET
       );
-      const { exp } = decodedAccessToken;
+      const { exp:accessaccessExpiresAt } = decodedAccessToken;
+      // decode the refreshTo token to send expiry time to the client
+      const decodedRefreshToken=await decodeToken(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET
+      )
+      const {exp:refreshaccessExpiresAt}=decodedRefreshToken
       // send the http only to the client
       res.cookie("token", refreshToken, {
         httpOnly: true,
@@ -108,7 +114,8 @@ const loginUser = async (req, res, next) => {
         },
         accessToken,
         refreshToken,
-        expiresAt: exp,
+        accessaccessExpiresAt,
+        refreshaccessExpiresAt,
       });
     } else {
       res.status(400);
@@ -212,7 +219,7 @@ const refreshAccesToken=async(req,res,next)=>{
     const decodedRefreshToken=await decodeToken(refreshToken, process.env.REFRESH_TOKEN_SECRET)
     const {exp,sub,email,role}=decodedRefreshToken;
     //encrypting the refresh token
-    const encryptedRefreshToken=crypto.createHash('sha256').update(refreshToken)
+    const encryptedRefreshToken=crypto.createHash('sha256').update(refreshToken).digest('hex');
     // find the user from id and refesh token
     const user=await User.findOne({
       _id:sub,
@@ -221,7 +228,6 @@ const refreshAccesToken=async(req,res,next)=>{
     // check the encrypted refresh token match with refresh token of user present in the db
     // as crypto module doesnot have the built comapre function to match input with encrypted field
     const refreshTokenMatch= encryptedRefreshToken === user.refreshToken ;
-      console.log({refreshTokenMatch})
     // blacklist the refresh token which is not present in the db
      if(!user || !refreshTokenMatch){
       res.status(401)
@@ -236,7 +242,7 @@ const refreshAccesToken=async(req,res,next)=>{
         email,
         role
       );
-      const newRefreshToken= await createRefreshToken(sub); 
+      const newRefreshToken= await createRefreshToken(sub.toString()); 
       //send it to the client
       const decodedNewAccessToken= await decodeToken(newAccessToken,process.env.ACCESS_TOKEN_SECRET)
       res.json({
@@ -247,7 +253,7 @@ const refreshAccesToken=async(req,res,next)=>{
           role: user.role,
         },
         accessToken:newAccessToken,
-        expiresAt:decodedNewAccessToken.exp,
+        accessExpiresAt:decodedNewAccessToken.exp,
         refreshToken:newRefreshToken,
       })
     }else{

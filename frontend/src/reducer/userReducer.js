@@ -3,7 +3,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
-  USER_REFRESH_TOKEN,
+  USER_REFRESHED_TOKEN,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
@@ -23,12 +23,14 @@ import {
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { loading: true };
+      return { loading: true ,isAuthenticated:false};
     case USER_LOGIN_SUCCESS:
       return {
         loading: false,
+        isAuthenticated:true,
         userInfo: action.payload.userInfo,
-        expiresAt: action.payload.expiresAt,
+        accessaccessExpiresAt: action.payload.accessaccessExpiresAt,
+        refreshaccessExpiresAt: action.payload.refreshaccessExpiresAt,
         accessToken: action.payload.accessToken,
         refreshToken:action.payload.refreshToken
       };
@@ -36,10 +38,13 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case USER_LOGOUT:
       return {};
-    case USER_REFRESH_TOKEN:
+    case USER_REFRESHED_TOKEN:
       return {
-        loading:false, userInfo: action.payload.userInfo,
-        expiresAt: action.payload.expiresAt,
+        loading:false, 
+        isAuthenticated:true,
+        userInfo: action.payload.userInfo,
+        accessaccessExpiresAt: action.payload.accessaccessExpiresAt,
+        refreshaccessExpiresAt: action.payload.refreshaccessExpiresAt,
         accessToken: action.payload.accessToken,
         refreshToken:action.payload.refreshToken
       };
@@ -65,16 +70,6 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 };
 
-export const userAuthReducer = (state = {}, action) => {
-  switch (action.type) {
-    case USER_AUTH_SUCCESS:
-      return { isAuthenticated: true };
-    case USER_AUTH_FAIL:
-      return { isAuthenticated: false };
-    default:
-      return state;
-  }
-};
 
 export const userForgotPasswordReducer = (state = {}, action) => {
   switch (action.type) {

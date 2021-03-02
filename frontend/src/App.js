@@ -21,19 +21,19 @@ const App = () => {
   const dispatch = useDispatch();
 
   const { darkMode } = useSelector((state) => state.theme);  
-  const {accessToken,refreshToken}=useSelector((state)=>state.userLogin) 
+  const {accessToken,accessExpiresAt,isAuthenicated}=useSelector((state)=>state.userLogin) 
+
+  const currentTime =new Date().getTime()
 
   useEffect(() => {
     dispatch(peristTheme());
-    // eslint-disable-next-line
   }, [darkMode]);
 
-  useEffect(()=>{
-    if(!accessToken && !refreshToken){
-      
-    }
-  },[accessToken,refreshToken])
-
+  // useEffect(()=>{
+  //   if((!accessToken || currentTime/1000> accessExpiresAt) && isAuthenicated){
+  //     dispatch(refreshTheToken())
+  //   }
+  // },[accessToken,currentTime,accessExpiresAt])
 
   return (
     <main className="flex">

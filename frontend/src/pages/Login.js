@@ -1,25 +1,28 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SignupForm from "../components/SignupForm";
+import { red } from "colors";
 
 const Login = () => {
   const { darkMode } = useSelector((state) => state.theme);
-  const { isAuthenticated } = useSelector((state) => state.userAuth);
+  const { isAuthenticated } = useSelector((state) => state.userLogin);
+  
   const history = useHistory();
+  const location =useLocation()
+  const redirect= location.search ? location.search.split('=')[1] : '/'
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      history.push(redirect);
     }
     //eslint-disable-next-line 
   }, [isAuthenticated]);
 
   return (
     <section
-      className="w-full h-screen lg:overflow-hidden"
+      className="w-full h-screen lg:overflow-hidden bg-gray-50 dark:bg-matt-black"
       style={{
-        backgroundColor: `${darkMode ? "#111924" : "#fff"}`,
         backgroundImage: "url('/assets/images/BgTrans.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
