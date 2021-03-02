@@ -46,6 +46,8 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({ type: USER_AUTH_SUCCESS });
     
     localStorage.setItem("accessExpiresAt", JSON.stringify(data.accessExpiresAt));
+    localStorage.setItem('refreshExpiresAt',JSON.stringify(data.refreshExpiresAt))
+    console.log({data})
   } catch (err) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -98,13 +100,15 @@ export const refreshTheToken= () => async (dispatch,getState) => {
   dispatch({type:USER_TOKEN_REQUEST})
     
       const {data}=await axios.post('/auth/refresh')
-      console.log({data})
+      console.count({data})
+      dispatch({type:USER_AUTH_SUCCESS})
       dispatch({type:USER_TOKEN_SUCCESS})
       dispatch({
         type: USER_REFRESHED_TOKEN,
         payload: data,
      })
   }catch(err){
+    dispatch({type:USER_AUTH_FAIL})
     dispatch({type:USER_TOKEN_FAIL,
       payload:err.response && err.response.data.message
       ? err.response.data.message
@@ -115,16 +119,22 @@ export const refreshTheToken= () => async (dispatch,getState) => {
 
 export const authenticated = () => async (dispatch, getState) => {
   const {
-    userLogin: {refreshExpiresAt,isAuthenicated},
+    userLogin: {refreshExpiresAt, accessExpiresAt,userInfo},
   } = getState();
-  if(!refreshTheToken){
-    return false
+  if(refreshExpiresAt  && accessExpiresAt){
+    dispatch({type:USER_AUTH_FAIL})
   }
+  
+  if(!refreshExpiresAt  || !accessExpiresAt){
+    dispatch({type:USER_AUTH_FAIL})
+  }
+
+
   const tokenExpired = new Date().getTime() / 1000 < refreshExpiresAt;
-  if(refreshExpiresAt && isAuthenicated){
-    return true
+  if(tokenExpired){
+    dispatch({type:USER_AUTH_SUCCESS})
   }else{
-    return false
+    dispatch({type:USER_AUTH_FAIL})
   }
 }
 
@@ -134,6 +144,7 @@ export const logout = () => async (dispatch,getState) => {
   try {
 
     localStorage.removeItem("accessExpiresAt");
+    localStorage.removeItem("refreshExpiresAt");
     
     const {userLogin:{accessToken}}=getState()
 

@@ -2,11 +2,10 @@ import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SignupForm from "../components/SignupForm";
-import { red } from "colors";
 
 const Login = () => {
   const { darkMode } = useSelector((state) => state.theme);
-  const { isAuthenticated } = useSelector((state) => state.userLogin);
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
   
   const history = useHistory();
   const location =useLocation()

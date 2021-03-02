@@ -13,6 +13,7 @@ import {
 
 const reducer = combineReducers({
   theme: themeReducer,
+  userAuth:userAuthReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userForgotPassword: userForgotPasswordReducer,
@@ -20,7 +21,17 @@ const reducer = combineReducers({
   userRefreshToken:userRefreshTokenReducer,
 });
 
-const initialState = {}
+const getAccessExpiry=localStorage.getItem('accessExpiresAt')?JSON.parse(localStorage.getItem('accessExpiresAt')):null
+
+const getRefreshExpiry=localStorage.getItem('refreshExpiresAt')?JSON.parse(localStorage.getItem('refreshExpiresAt')):null
+
+
+const initialState = {
+  userLogin:{
+  accessExpiresAt:getAccessExpiry,
+  refreshExpiresAt:getRefreshExpiry,
+  }
+}
 
 const middleware = [thunk];
 

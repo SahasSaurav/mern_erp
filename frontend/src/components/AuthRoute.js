@@ -1,17 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import {useEffect } from 'react'
+import { useDispatch, useSelector} from "react-redux";
 import { Route,} from "react-router-dom";
 import Login from "../pages/Login";
-import {authenticated} from '../actions/userAction'
 
 const AuthRoute = ({ component: Component, ...rest }) => {
-  // const userAuth = useSelector((state) => state.userAuth);
+  const userAuth = useSelector((state) => state.userAuth);
   const userLogin = useSelector((state) => state.userLogin);
 
-  // const {isAuthenticated}=userAuth
-  const { accessToken,accessExpiresAt,refreshToken,isAuthenticated} = userLogin;
-
-
-
+  const {isAuthenticated}=userAuth  
+  
   return (
     <Route
       {...rest}

@@ -6,7 +6,7 @@ import AuthRoute from "./components/AuthRoute";
 // import AdminRoute from "./components/AdminRoute";
 
 import { peristTheme } from "./actions/themeAction";
-import {refreshTheToken} from './actions/userAction'
+import {refreshTheToken,authenticated} from './actions/userAction'
 
 const Dashboard=lazy(()=>import("./pages/Dashboard")) 
 const Login=lazy(()=>import ("./pages/Login")) 
@@ -21,7 +21,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   const { darkMode } = useSelector((state) => state.theme);  
-  const {accessToken,accessExpiresAt,isAuthenicated}=useSelector((state)=>state.userLogin) 
+  const {accessToken,refreshToken,accessExpiresAt,refreshExpiresAt}=useSelector((state)=>state.userLogin) 
+
+  const {isAuthenticated}=useSelector(state=>state.userAuth)
 
   const currentTime =new Date().getTime()
 
@@ -29,11 +31,22 @@ const App = () => {
     dispatch(peristTheme());
   }, [darkMode]);
 
-  // useEffect(()=>{
-  //   if((!accessToken || currentTime/1000> accessExpiresAt) && isAuthenicated){
-  //     dispatch(refreshTheToken())
-  //   }
-  // },[accessToken,currentTime,accessExpiresAt])
+  
+  useEffect(() => {
+    dispatch(authenticated())
+  }, [dispatch,accessExpiresAt,refreshExpiresAt])
+
+  useEffect(()=>{
+    if(isAuthenticated){
+      if( currentTime/1000>accessExpiresAt){
+        dispatch(refreshTheToken())
+      }
+      if(!accessToken || !refreshToken){
+          dispatch(refreshTheToken())
+      }
+    }
+    
+  },[currentTime,accessExpiresAt,accessToken,refreshToken])
 
   return (
     <main className="flex">

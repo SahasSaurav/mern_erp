@@ -90,13 +90,13 @@ const loginUser = async (req, res, next) => {
         accessToken,
         process.env.ACCESS_TOKEN_SECRET
       );
-      const { exp:accessaccessExpiresAt } = decodedAccessToken;
+      const { exp:accessExpiresAt } = decodedAccessToken;
       // decode the refreshTo token to send expiry time to the client
       const decodedRefreshToken=await decodeToken(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET
       )
-      const {exp:refreshaccessExpiresAt}=decodedRefreshToken
+      const {exp:refreshExpiresAt}=decodedRefreshToken
       // send the http only to the client
       res.cookie("token", refreshToken, {
         httpOnly: true,
@@ -114,8 +114,8 @@ const loginUser = async (req, res, next) => {
         },
         accessToken,
         refreshToken,
-        accessaccessExpiresAt,
-        refreshaccessExpiresAt,
+        accessExpiresAt,
+        refreshExpiresAt,
       });
     } else {
       res.status(400);
