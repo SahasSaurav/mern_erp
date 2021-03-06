@@ -4,8 +4,11 @@ import Login from "../pages/Login";
 
 const AdminRoute = ({ component:Component, ...rest }) => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo,isAuthenticated  } = userLogin;
-
+  const userAuth = useSelector((state) => state.userAuth);
+  
+  const { userInfo} = userLogin;
+  const {isAuthenticated} = userAuth;
+  
   const isAdmin=userInfo.role==='admin'
 
   return (

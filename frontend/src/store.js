@@ -21,9 +21,9 @@ const reducer = combineReducers({
   userRefreshToken:userRefreshTokenReducer,
 });
 
-const getAccessExpiry=localStorage.getItem('accessExpiresAt')?JSON.parse(localStorage.getItem('accessExpiresAt')):null
+const getAccessExpiry=localStorage.getItem('accessExpiresAt')?JSON.parse(localStorage.getItem('accessExpiresAt')):undefined
 
-const getRefreshExpiry=localStorage.getItem('refreshExpiresAt')?JSON.parse(localStorage.getItem('refreshExpiresAt')):null
+const getRefreshExpiry=localStorage.getItem('refreshExpiresAt')?JSON.parse(localStorage.getItem('refreshExpiresAt')):undefined
 
 
 const initialState = {

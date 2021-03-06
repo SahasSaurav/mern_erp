@@ -34,13 +34,13 @@ const App = () => {
   
   useEffect(() => {
     dispatch(authenticated())
-  }, [dispatch,accessExpiresAt,refreshExpiresAt])
+  }, [accessExpiresAt,refreshExpiresAt])
 
   useEffect(()=>{
     if(isAuthenticated){
-      if( currentTime/1000>accessExpiresAt){
-        dispatch(refreshTheToken())
-      }
+      // if( currentTime/1000>accessExpiresAt){
+      //   dispatch(refreshTheToken())
+      // }
       if(!accessToken || !refreshToken){
           dispatch(refreshTheToken())
       }

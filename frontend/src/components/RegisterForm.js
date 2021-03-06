@@ -50,6 +50,7 @@ const RegisterForm = () => {
             className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${
               formError.email ? "ring-red-400" : "ring-blue-400"
             } ${formError.email ? "ring-2" : ""}  w-full pl-10`}
+            autoComplete="off"
           />
         </div>
         {formError.email && (
@@ -79,6 +80,7 @@ const RegisterForm = () => {
             className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2  ${
               formError.email ? "ring-red-400" : "ring-blue-400"
             } ${formError.email ? "ring-2" : ""}  w-full pl-10`}
+            autoComplete="off"
           />
         </div>
         {formError.password && (

@@ -34,26 +34,69 @@ const addUser = async (req, res, next) => {
   }
 };
 
-const deleteUser=(req,res,next)=>{
-  try{
-    const {id}=req.params
-    const  userDoesExist=User.findById({_id:id});
-    if(!userDoesExist){
-      res.status(404)
-      throw new Error('User does not exist')
-    }
-    
-  }catch(err){
-
-  }
-}
-
-// const uploadPhoto=(req,res,next){
-//   try {
-    
-//   } catch (err) {
+//get data from user and student model
+// const getUser=(req,res,next)=>{
+//   try{
+//     const {id}=req.params
+//     const  user=User.findById({_id:id});
+//     if(!user){
+//       res.status(404)
+//       throw new Error('User does not exist')
+//       return
+//     }else{
+//       await user.remove()
+//       res.json(user)
+//     }
+//   }catch(err){
 //     next(err)
 //   }
 // }
 
-export { addUser };
+const updateUserInfo=async(req,res,next)=>{
+  try{
+    const {id}=req.params;
+    const {name,dob,phone,semester,bloodGroup,addharNo,nad,bankAccount}=req.body
+    // const {}=req.body
+    // const {}=req.body
+  }catch(err){
+    next(err)
+  }
+}
+
+const deleteUser=async(req,res,next)=>{
+  try{
+    const {id}=req.params
+    const  user=User.findById({_id:id});
+    if(!user){
+      res.status(404)
+      throw new Error('User does not exist')
+      return
+    }else{
+      await user.remove()
+      res.json({message:'User removed'})
+    }
+  }catch(err){
+    next(err)
+  }
+}
+
+const uploadPhoto=async(req,res,next)=>{
+  try{
+    const {id}=req.params
+    const {profilePic}=req.body
+    const  user=User.findById({_id:id});
+    if(!user){
+      res.status(404)
+      throw new Error('User does not exist')
+      return
+    }else{
+      user.profilePic=profilePic
+      await user.save()
+      res.json({message:'User removed'})
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+export { addUser,deleteUser,uploadPhoto };

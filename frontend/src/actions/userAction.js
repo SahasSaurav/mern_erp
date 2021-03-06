@@ -96,7 +96,6 @@ export const register = (id, token, email, password, repeatPassword) => async (
 
 export const refreshTheToken= () => async (dispatch,getState) => {
   try{
-    const {userLogin:{accessaccessExpiresAt}}=getState();
   dispatch({type:USER_TOKEN_REQUEST})
     
       const {data}=await axios.post('/auth/refresh')
@@ -119,10 +118,10 @@ export const refreshTheToken= () => async (dispatch,getState) => {
 
 export const authenticated = () => async (dispatch, getState) => {
   const {
-    userLogin: {refreshExpiresAt, accessExpiresAt,userInfo},
+    userLogin: {refreshExpiresAt, accessExpiresAt},
   } = getState();
   if(refreshExpiresAt  && accessExpiresAt){
-    dispatch({type:USER_AUTH_FAIL})
+    dispatch({type:USER_AUTH_SUCCESS})
   }
   
   if(!refreshExpiresAt  || !accessExpiresAt){

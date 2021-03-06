@@ -16,15 +16,11 @@ const Toggle = () => {
     }
   };
 
-  const toggleRef= useRef()
+  const toggleRef= useRef(null)
 
   useEffect(() => {
-    const theme=localStorage.getItem('theme')
-    if(theme){
-      const darkMode=JSON.parse(theme);
       toggleRef.current.checked=darkMode;
-    }
-  }, []);
+  }, [darkMode]);
 
 
 
