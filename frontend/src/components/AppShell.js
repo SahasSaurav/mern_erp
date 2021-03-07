@@ -1,6 +1,9 @@
 import Sidebar from './Sidebar'
+import  Calendar from 'react-calendar';
+import '../styles/Calendar.css'
 
 const AppShell = ({children}) => {
+
   return (
     <>
       <Sidebar />
@@ -16,14 +19,18 @@ const AppShell = ({children}) => {
               <h3 className="text-gray-700 dark:text-red-50 text-3xl font-semibold tracking-wide">
                 Calendar
               </h3>
-              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg"></div>
+              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg">
+                <Calendar />
+              </div>
             </div>
             {/* Reminder */}
             <div className="flex flex-col rounded-xl gap-4">
               <h3 className="text-gray-700 dark:text-red-50 text-3xl font-semibold tracking-wide ">
                 Reminder
               </h3>
-              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg"></div>
+              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg">
+                {/* <Calendar /> */}
+              </div>
             </div>
           </div>
         </div>

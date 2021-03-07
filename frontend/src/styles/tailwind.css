@@ -33,7 +33,7 @@
     src: local('/assets/fonts/SF-Pro-Display-Bold.otf') format("otf");
   }
   body{
-    @apply font-sf-pro overflow-x-hidden;
+    @apply font-sf-pro overflow-x-hidden bg-gray-50 dark:bg-gray-800;
   }
 }
 /* 
