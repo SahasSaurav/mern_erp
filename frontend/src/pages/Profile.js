@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 
 import ImageUploader from '../components/ImageUploader'
-import Sidebar from "../components/Sidebar";
 import BouncingLoader from "../components/BouncingLoader";
 import AppShell from '../components/AppShell';
 

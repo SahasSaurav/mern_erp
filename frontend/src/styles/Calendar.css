@@ -55,6 +55,10 @@ abbr[title]{
 .react-calendar__navigation button:enabled:focus {
 background-color: #e7f2fb;
 }
+html.dark .react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+background-color: #76baff;
+}
 .react-calendar__navigation__label:enabled:hover,
 .react-calendar__navigation__label:enabled:focus {
   border-radius: 10px;
@@ -140,7 +144,7 @@ html.dark .react-calendar__tile:enabled:hover,
 }
 html.dark .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-  background: #333;
+  background: rgb(101, 137, 148);
 }
 .react-calendar__tile--active {
   background: #54a5f0;

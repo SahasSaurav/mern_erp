@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import {useState} from 'react'
 import Sidebar from './Sidebar'
-import "../components/CSS/Calendar.css";
+import Calendar from 'react-calendar';
+import '../styles/Calendar.css'
 
-const AppShell = ({children}) => {
-  
+const AppShell = ({ children }) => {
+
   const [value, onChange] = useState(new Date());
-  
+
   return (
     <>
       <Sidebar />
@@ -22,7 +22,7 @@ const AppShell = ({children}) => {
               <h3 className="text-gray-700 dark:text-red-50 text-3xl font-semibold tracking-wide">
                 Calendar
               </h3>
-              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-auto w-full shadow-lg">
+              <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg">
                 <Calendar onChange={onChange} value={value} />
               </div>
             </div>
@@ -39,7 +39,7 @@ const AppShell = ({children}) => {
         </div>
       </section>
     </>
-  );
+  )
 }
 
 export default AppShell

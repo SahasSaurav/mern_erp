@@ -4,11 +4,7 @@ import AppShell from "../components/AppShell";
 const Fee = () => {
   return (
     <AppShell>
-      <div>
-        <form >
-          
-        </form>
-      </div>
+
       <div >
         <h3 class="text-4xl text-gray-800 dark:text-gray-50 font-semibold mb-6">Transaction History</h3>
         <table class="rounded-md overflow-hidden w-full  dark:bg-gray-800 bg-white dark:text-gray-200 divide-y-2 divide-gray-500 dark:divide-gray-300">
