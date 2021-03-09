@@ -35,7 +35,7 @@ const registerSchema = joi
     repeatPassword: joi
       .required()
       .valid(joi.ref("password"))
-      .error(() => new Error('Confirm Password must match to password'))
+      .error(() => new Error('Confirm Password must match to the password'))
       .label("Confirm Password"),
 
   })
@@ -164,7 +164,7 @@ const resetPasswordSchema = joi
     repeatPassword: joi
       .required()
       .valid(joi.ref("password"))
-      .error(() => new Error('Confirm Password must match to password'))
+      .error(() => new Error('Confirm Password must match to the password'))
       .label("Confirm Password"),
   })
   .options({ abortEarly: false });

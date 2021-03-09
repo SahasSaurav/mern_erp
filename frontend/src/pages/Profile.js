@@ -22,7 +22,7 @@ const Profile = () => {
           <ImageUploader />
           <br/>
           <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full ">
-            <div className="flex flex-wrap space-x-8 w-full">
+            <div className="flex flex-wrap gap-x-8 w-full">
               <div className="mb-3 pt-0 w-full  max-w-xs">
                 <label className="block mb-1 dark:text-gray-50" htmlFor="fristName">Frist Name</label>
                 <input type="text"
@@ -89,7 +89,7 @@ const Profile = () => {
                 <small className="error">{formError.address?.message}</small>
               )}
             </div>
-            <div className="flex flex-wrap space-x-8 w-full">
+            <div className="flex flex-wrap gap-x-8 w-full">
               <div className="mb-3 pt-0  w-full max-w-xs">
                 <label className="block mb-1 dark:text-gray-50" htmlFor="city">City</label>
                 <input type="text"
@@ -117,7 +117,7 @@ const Profile = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap space-x-8 w-full">
+            <div className="flex flex-wrap gap-x-8 w-full">
               <div className="mb-3 pt-0  w-full max-w-xs">
                 <label className="block mb-1 dark:text-gray-50" htmlFor="zip">Zip Code</label>
                 <input type="text"

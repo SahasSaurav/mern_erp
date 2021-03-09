@@ -43,17 +43,17 @@ app.use(xss())
 // Prevent http param pollution
 app.use(hpp())
 // Rate limiting to prevent brute forse attack
-// const limiter= rateLimit({  
-//   max: 100,
-//   windowMs: 60 * 60 * 1000,
-//   message:{
-//     success: false,
-//     status:429,
-//     message:'Too many requests from this IP, please try again in an hour!',
-//   }
+const limiter= rateLimit({  
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message:{
+    success: false,
+    status:429,
+    message:'Too many requests from this IP, please try again in an hour!',
+  }
    
-// })
-// app.use(limiter)
+})
+app.use(limiter)
 
 app.get("/", (req, res) => {
   res.send("hello");

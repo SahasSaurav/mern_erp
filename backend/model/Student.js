@@ -28,6 +28,12 @@ const studentSchema=mongoose.Schema({
     required:true,
     enums:['I','II','III','IV','V','VI']
   },
+  course:[
+    {
+      id:mongoose.Schema.Types.ObjectId,
+      ref:"Course"
+    }
+  ],
   phone:{
     type:String,
     required:true,
