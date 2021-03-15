@@ -2,7 +2,6 @@ import User from "../model/User.js";
 import { createSignInToken } from "../utils/jwtToken.js";
 import { addUserSchema } from "../utils/validation.js";
 
-
 const addUser = async (req, res, next) => {
   try {
     const result = await addUserSchema.validateAsync({ ...req.body });
