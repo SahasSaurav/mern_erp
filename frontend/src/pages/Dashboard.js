@@ -1,6 +1,8 @@
 import Attendance from "../chart/Attendance";
 import AppShell from "../components/AppShell";
+import BarChart from "../chart/BarChart";
 import Toggle from "../components/Toggle";
+import LineChart from "../chart/LineChart";
 
 
 const Dashboard = () => {
@@ -16,16 +18,16 @@ const Dashboard = () => {
         </div>
         <div className="grid grid-cols-3 grid-rows-2 gap-6 max-h-full h-full  ">
           {/* average_mark */}
-          <div className="bg-white col-span-2 dark:bg-blueGray-800 rounded-xl shadow-lg" >
-            
+          <div className="bg-white col-span-2 dark:bg-blueGray-800 rounded-xl shadow-lg p-4" >
+          <BarChart />  
           </div>
           {/* attendance */}
           <div className=" flex justify-center items-center bg-white dark:bg-blueGray-800 rounded-xl shadow-lg ">
           <Attendance />
           </div>
           {/* subject wise mark */}
-          <div className="bg-white dark:bg-blueGray-800 col-span-3  rounded-xl shadow-lg"  >
-            
+          <div className="bg-white dark:bg-blueGray-800 col-span-3  rounded-xl shadow-lg p-4"  >
+          <LineChart />  
           </div>
         </div>
       </div>
