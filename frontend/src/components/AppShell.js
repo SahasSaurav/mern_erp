@@ -2,6 +2,7 @@ import {useState} from 'react'
 import Sidebar from './Sidebar'
 import Calendar from 'react-calendar';
 import '../styles/Calendar.css'
+import Reminder from './Reminder';
 
 const AppShell = ({ children }) => {
 
@@ -32,7 +33,7 @@ const AppShell = ({ children }) => {
                 Reminder
               </h3>
               <div className="bg-white dark:bg-blueGray-800 rounded-xl h-full w-full shadow-lg">
-                {/* <Calendar /> */}
+              <Reminder />
               </div>
             </div>
           </div>

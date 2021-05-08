@@ -30,7 +30,8 @@ const Profile = () => {
                     required: 'Please enter your frist name'
                   })}
                   name="fristName"
-                  placeholder="Frist Name" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.fristName ? "ring-red-400" : "ring-blue-400"
+                  value="John"
+                  placeholder="Frist Name" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.fristName ? "ring-red-400" : "ring-blue-400"
                     } ${formError.fristName ? "ring-2" : ""}  w-full   pl-6`} />
                 {formError.fristName && (
                   <small className="error">{formError.fristName?.message}</small>
@@ -42,8 +43,9 @@ const Profile = () => {
                   ref={register({
                     required: 'Please enter your last name'
                   })}
+                  value="Doe"
                   name="lastName"
-                  placeholder="Last Name" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.lastName ? "ring-red-400" : "ring-blue-400"
+                  placeholder="Last Name" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.lastName ? "ring-red-400" : "ring-blue-400"
                     } ${formError.lastName ? "ring-2" : ""}  w-full  pl-6`} />
                 {formError.lastName && (
                   <small className="error">{formError.lastName?.message}</small>
@@ -56,8 +58,9 @@ const Profile = () => {
                 ref={register({
                   required: 'Please enter your email'
                 })}
+                value="johndoe@gmail.com"
                 name="email"
-                placeholder="Email" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.email ? "ring-red-400" : "ring-blue-400"
+                placeholder="Email" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.email ? "ring-red-400" : "ring-blue-400"
                   } ${formError.email ? "ring-2" : ""}  w-full pl-6`} />
               {formError.email && (
                 <small className="error">{formError.email?.message}</small>
@@ -69,8 +72,9 @@ const Profile = () => {
                 ref={register({
                   required: 'Please enter your contact number'
                 })}
+                value="9999969969"
                 name="phone"
-                placeholder="Contact Number" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.phone ? "ring-red-400" : "ring-blue-400"
+                placeholder="Contact Number" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.phone ? "ring-red-400" : "ring-blue-400"
                   } ${formError.phone ? "ring-2" : ""}  w-full pl-6`} />
               {formError.phone && (
                 <small className="error">{formError.phone?.message}</small>
@@ -82,8 +86,9 @@ const Profile = () => {
                 ref={register({
                   required: 'Please enter your address'
                 })}
+                value="12th Lane Old Post"
                 name="address"
-                placeholder="Address" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.address ? "ring-red-400" : "ring-blue-400"
+                placeholder="Address" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.address ? "ring-red-400" : "ring-blue-400"
                   } ${formError.address ? "ring-2" : ""}  w-full pl-6`} />
               {formError.address && (
                 <small className="error">{formError.address?.message}</small>
@@ -96,8 +101,9 @@ const Profile = () => {
                   ref={register({
                     required: 'Please enter your city name'
                   })}
+                  value="Ranchi"
                   name="city"
-                  placeholder="City" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.city ? "ring-red-400" : "ring-blue-400"
+                  placeholder="City" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.city ? "ring-red-400" : "ring-blue-400"
                     } ${formError.city ? "ring-2" : ""}  w-full pl-6`} />
                 {formError.city && (
                   <small className="error">{formError.city?.message}</small>
@@ -109,8 +115,9 @@ const Profile = () => {
                   ref={register({
                     required: 'Please enter your state name'
                   })}
+                  value="Jharkahnd"
                   name="state"
-                  placeholder="State" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.state ? "ring-red-400" : "ring-blue-400"
+                  placeholder="State" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.state ? "ring-red-400" : "ring-blue-400"
                     } ${formError.state ? "ring-2" : ""}  w-full pl-6`} />
                 {formError.state && (
                   <small className="error">{formError.state?.message}</small>
@@ -124,8 +131,9 @@ const Profile = () => {
                   ref={register({
                     required: 'Please enter your zip code'
                   })}
+                  value="834002"
                   name="zip"
-                  placeholder="Zip Code" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.zip ? "ring-red-400" : "ring-blue-400"
+                  placeholder="Zip Code" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.zip ? "ring-red-400" : "ring-blue-400"
                     } ${formError.zip ? "ring-2" : ""}  w-full pl-6`} />
                 {formError.zip && (
                   <small className="error">{formError.zip?.message}</small>
@@ -137,8 +145,9 @@ const Profile = () => {
                   ref={register({
                     required: 'Please enter your country name'
                   })}
+                  value="India"
                   name="country"
-                  placeholder="Country" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-normal border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.country ? "ring-red-400" : "ring-blue-400"
+                  placeholder="Country" className={`px-2 py-3 placeholder-gray-400 dark:placeholder-gray-200 text-gray-700 dark:text-gray-200 relative bg-white dark:bg-gray-700 rounded-lg text-base font-medium border border-gray-400 dark:border-gray-500 outline-none focus:outline-none focus:ring-2 ${formError.country ? "ring-red-400" : "ring-blue-400" 
                     } ${formError.country ? "ring-2" : ""}  w-full pl-6`} />
                 {formError.country && (
                   <small className="error">{formError.country?.message}</small>

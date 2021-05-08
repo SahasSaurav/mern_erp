@@ -26,6 +26,7 @@ const SignupForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="w-full"
     >
+      {error && ( <div className="mb-3 p-4 bg-red-200 dark:bg-red-100   text-red-600 font-semibold rounded ">{error}</div>)}
       <div className=" space-y-5 ">
         <div className="relative flex w-full flex-wrap items-stretch mb-1 rounded-lg">
           <span className="flex z-10 h-full leading-normal font-normal text-center text-gray-400 dark:text- absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-3">

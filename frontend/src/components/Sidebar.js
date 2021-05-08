@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div>
         <div className="flex justify-center items-center mt-10 w-24 h-24  rounded-full bg-gray-300 dark:bg-gray-600 shadow-xl ">
           <div className="flex justify-center items-center text-white text-2xl tracking-widest font-medium w-20 h-20 rounded-full bg-gray-700 border-4 border-white shadow-md">
-            EM
+            JD
           </div>
         </div>
         <p className=" mt-2  text-lg tracking-wide font-semibold text-gray-600 dark:text-white">

@@ -5,8 +5,10 @@ import { addUserSchema } from "../utils/validation.js";
 const addUser = async (req, res, next) => {
   try {
     const result = await addUserSchema.validateAsync({ ...req.body });
+    console.log({result})
     const { email, name, password } = result;
     const userDoesExist = await User.findOne({ email });
+    console.log({userDoesExist})
     if (userDoesExist) {
       res.status(401);
       throw new Error("Another user already exist with this email ");
@@ -14,6 +16,7 @@ const addUser = async (req, res, next) => {
     }
 
     const user = await User.create({ name, email,password });
+    console.log(user)
     const signInToken = await createSignInToken(user);
 
     const signinLink = `${req.protocol}://${req.get(

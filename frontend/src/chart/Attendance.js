@@ -1,5 +1,5 @@
 const Attendance = () => {
-  const attendance = 50;
+  const attendance = 80;
   return (
     <svg
       id="time-progress"
@@ -19,7 +19,7 @@ const Attendance = () => {
         strokeDashoffset={0}
       ></circle>
       <circle
-        className="duration-500 ease-linear origin-center transform -rotate-90 stroke-current transition-stroke-dashoffset text-red-400 dark:text-red-500"
+        className={`duration-500 ease-linear origin-center transform -rotate-90 stroke-current transition-stroke-dashoffset ${attendance<75?'text-red-400 dark:text-red-500':"text-grenn-400 dark:text-green-500"}`}
         cx="50"
         cy="50"
         r="44"
@@ -31,7 +31,7 @@ const Attendance = () => {
         strokeDashoffset={276.5 - (attendance / 100) * 276.5}
       ></circle>
       <text
-        className="fill-current text-lighblue font-bold  text-red-400"
+        className={`fill-current text-lighblue font-bold  ${attendance<75?'text-red-400 dark:text-red-500':"text-grenn-400 dark:text-green-500"}` }
         fontSize="120%"
         textAnchor="middle"
         x="50%"

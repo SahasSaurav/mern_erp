@@ -12,6 +12,7 @@ const requireAuth = async (req, res, next) => {
     }
     //check whether bearer token is present and start with the Bearer
    if(bearerToken && bearerToken.startsWith('Bearer')){
+
     // spliting the bearer token to get access token
     const token=bearerToken.split(' ')[1]
     //decoding the access token to get the user id from token 
