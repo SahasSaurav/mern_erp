@@ -18,7 +18,7 @@ const Reminder = () => {
   return (
     <div className="flex flex-col space-y-5 p-4">
       {Children.toArray(reminders.map(reminder => (
-        <div className="flex flex-col  bg-gray-700  font-medium p-4 text-white rounded-lg">
+        <div className="flex flex-col  bg-gray-100 shadow-lg dark:bg-gray-700  font-medium p-4 dark:text-white rounded-lg">
           <p className="">{reminder.title}</p>
           <div className="flex justify-between ">
             <span className="text-red-500">{reminder.posted}</span>
